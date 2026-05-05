@@ -1,0 +1,29 @@
+name: Check generated code
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  check-generated:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: bufbuild/buf-action@v1
+        with:
+          setup_only: true
+
+      - name: Generate
+        run: buf generate
+
+      - name: Check for diff
+        run: |
+          if ! git diff --quiet; then
+            echo "Generated code is out of sync with proto definitions."
+            echo "Run 'buf generate' locally and commit the result."
+            git diff
+            exit 1
+          fi
