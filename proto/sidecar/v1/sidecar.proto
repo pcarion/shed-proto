@@ -11,6 +11,26 @@ option go_package = "github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1";
 service Sidecar {
   // ServiceStatus returns the systemd status for one or more services.
   rpc ServiceStatus(ServiceStatusRequest) returns (ServiceStatusResponse);
+  // PasswordGet returns an existing password or creates a new one.
+  rpc PasswordGet(PasswordGetRequest) returns (PasswordGetResponse);
+}
+
+enum PasswordType {
+  PASSWORD_TYPE_UNSPECIFIED = 0;
+  // PASSWORD_TYPE_LOWERCASE uses lowercase letters (a).
+  PASSWORD_TYPE_LOWERCASE = 1;
+  // PASSWORD_TYPE_UPPERCASE uses uppercase letters (A).
+  PASSWORD_TYPE_UPPERCASE = 2;
+  // PASSWORD_TYPE_DIGIT uses digits (1).
+  PASSWORD_TYPE_DIGIT = 3;
+  // PASSWORD_TYPE_SYMBOL uses symbols (#).
+  PASSWORD_TYPE_SYMBOL = 4;
+  // PASSWORD_TYPE_HEX_LOWER uses lowercase hexadecimal characters (h).
+  PASSWORD_TYPE_HEX_LOWER = 5;
+  // PASSWORD_TYPE_HEX_UPPER uses uppercase hexadecimal characters (H).
+  PASSWORD_TYPE_HEX_UPPER = 6;
+  // PASSWORD_TYPE_UUID_V7 generates a UUIDv7 value (u7).
+  PASSWORD_TYPE_UUID_V7 = 7;
 }
 
 message ServiceStatusRequest {
@@ -35,4 +55,21 @@ message ServiceStatus {
   int64 main_pid = 6;
   // raw holds the full `systemctl status` output; omitted when not requested.
   optional string raw = 7;
+}
+
+message PasswordGetRequest {
+  // service_name is the name of the service requesting a password.
+  string service_name = 1;
+  // name is the name of the password.
+  string name = 2;
+  // length is the desired password length.
+  int32 length = 3;
+  // type controls how the password is generated.
+  PasswordType type = 4;
+}
+
+message PasswordGetResponse {
+  string password = 1;
+  // is_new is true when the password was just created.
+  bool is_new = 2;
 }

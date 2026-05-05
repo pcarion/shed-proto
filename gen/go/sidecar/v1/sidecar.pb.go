@@ -21,6 +21,77 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type PasswordType int32
+
+const (
+	PasswordType_PASSWORD_TYPE_UNSPECIFIED PasswordType = 0
+	// PASSWORD_TYPE_LOWERCASE uses lowercase letters (a).
+	PasswordType_PASSWORD_TYPE_LOWERCASE PasswordType = 1
+	// PASSWORD_TYPE_UPPERCASE uses uppercase letters (A).
+	PasswordType_PASSWORD_TYPE_UPPERCASE PasswordType = 2
+	// PASSWORD_TYPE_DIGIT uses digits (1).
+	PasswordType_PASSWORD_TYPE_DIGIT PasswordType = 3
+	// PASSWORD_TYPE_SYMBOL uses symbols (#).
+	PasswordType_PASSWORD_TYPE_SYMBOL PasswordType = 4
+	// PASSWORD_TYPE_HEX_LOWER uses lowercase hexadecimal characters (h).
+	PasswordType_PASSWORD_TYPE_HEX_LOWER PasswordType = 5
+	// PASSWORD_TYPE_HEX_UPPER uses uppercase hexadecimal characters (H).
+	PasswordType_PASSWORD_TYPE_HEX_UPPER PasswordType = 6
+	// PASSWORD_TYPE_UUID_V7 generates a UUIDv7 value (u7).
+	PasswordType_PASSWORD_TYPE_UUID_V7 PasswordType = 7
+)
+
+// Enum value maps for PasswordType.
+var (
+	PasswordType_name = map[int32]string{
+		0: "PASSWORD_TYPE_UNSPECIFIED",
+		1: "PASSWORD_TYPE_LOWERCASE",
+		2: "PASSWORD_TYPE_UPPERCASE",
+		3: "PASSWORD_TYPE_DIGIT",
+		4: "PASSWORD_TYPE_SYMBOL",
+		5: "PASSWORD_TYPE_HEX_LOWER",
+		6: "PASSWORD_TYPE_HEX_UPPER",
+		7: "PASSWORD_TYPE_UUID_V7",
+	}
+	PasswordType_value = map[string]int32{
+		"PASSWORD_TYPE_UNSPECIFIED": 0,
+		"PASSWORD_TYPE_LOWERCASE":   1,
+		"PASSWORD_TYPE_UPPERCASE":   2,
+		"PASSWORD_TYPE_DIGIT":       3,
+		"PASSWORD_TYPE_SYMBOL":      4,
+		"PASSWORD_TYPE_HEX_LOWER":   5,
+		"PASSWORD_TYPE_HEX_UPPER":   6,
+		"PASSWORD_TYPE_UUID_V7":     7,
+	}
+)
+
+func (x PasswordType) Enum() *PasswordType {
+	p := new(PasswordType)
+	*p = x
+	return p
+}
+
+func (x PasswordType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PasswordType) Descriptor() protoreflect.EnumDescriptor {
+	return file_sidecar_v1_sidecar_proto_enumTypes[0].Descriptor()
+}
+
+func (PasswordType) Type() protoreflect.EnumType {
+	return &file_sidecar_v1_sidecar_proto_enumTypes[0]
+}
+
+func (x PasswordType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PasswordType.Descriptor instead.
+func (PasswordType) EnumDescriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{0}
+}
+
 type ServiceStatusRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// services is the list of systemd unit names to query (e.g. "nginx.service").
@@ -214,6 +285,131 @@ func (x *ServiceStatus) GetRaw() string {
 	return ""
 }
 
+type PasswordGetRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// service_name is the name of the service requesting a password.
+	ServiceName string `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
+	// name is the name of the password.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// length is the desired password length.
+	Length int32 `protobuf:"varint,3,opt,name=length,proto3" json:"length,omitempty"`
+	// type controls how the password is generated.
+	Type          PasswordType `protobuf:"varint,4,opt,name=type,proto3,enum=sidecar.v1.PasswordType" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordGetRequest) Reset() {
+	*x = PasswordGetRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordGetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordGetRequest) ProtoMessage() {}
+
+func (x *PasswordGetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordGetRequest.ProtoReflect.Descriptor instead.
+func (*PasswordGetRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *PasswordGetRequest) GetServiceName() string {
+	if x != nil {
+		return x.ServiceName
+	}
+	return ""
+}
+
+func (x *PasswordGetRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PasswordGetRequest) GetLength() int32 {
+	if x != nil {
+		return x.Length
+	}
+	return 0
+}
+
+func (x *PasswordGetRequest) GetType() PasswordType {
+	if x != nil {
+		return x.Type
+	}
+	return PasswordType_PASSWORD_TYPE_UNSPECIFIED
+}
+
+type PasswordGetResponse struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	Password string                 `protobuf:"bytes,1,opt,name=password,proto3" json:"password,omitempty"`
+	// is_new is true when the password was just created.
+	IsNew         bool `protobuf:"varint,2,opt,name=is_new,json=isNew,proto3" json:"is_new,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordGetResponse) Reset() {
+	*x = PasswordGetResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordGetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordGetResponse) ProtoMessage() {}
+
+func (x *PasswordGetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordGetResponse.ProtoReflect.Descriptor instead.
+func (*PasswordGetResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *PasswordGetResponse) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *PasswordGetResponse) GetIsNew() bool {
+	if x != nil {
+		return x.IsNew
+	}
+	return false
+}
+
 var File_sidecar_v1_sidecar_proto protoreflect.FileDescriptor
 
 const file_sidecar_v1_sidecar_proto_rawDesc = "" +
@@ -235,9 +431,27 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x19\n" +
 	"\bmain_pid\x18\x06 \x01(\x03R\amainPid\x12\x15\n" +
 	"\x03raw\x18\a \x01(\tH\x00R\x03raw\x88\x01\x01B\x06\n" +
-	"\x04_raw2_\n" +
+	"\x04_raw\"\x91\x01\n" +
+	"\x12PasswordGetRequest\x12!\n" +
+	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
+	"\x06length\x18\x03 \x01(\x05R\x06length\x12,\n" +
+	"\x04type\x18\x04 \x01(\x0e2\x18.sidecar.v1.PasswordTypeR\x04type\"H\n" +
+	"\x13PasswordGetResponse\x12\x1a\n" +
+	"\bpassword\x18\x01 \x01(\tR\bpassword\x12\x15\n" +
+	"\x06is_new\x18\x02 \x01(\bR\x05isNew*\xef\x01\n" +
+	"\fPasswordType\x12\x1d\n" +
+	"\x19PASSWORD_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
+	"\x17PASSWORD_TYPE_LOWERCASE\x10\x01\x12\x1b\n" +
+	"\x17PASSWORD_TYPE_UPPERCASE\x10\x02\x12\x17\n" +
+	"\x13PASSWORD_TYPE_DIGIT\x10\x03\x12\x18\n" +
+	"\x14PASSWORD_TYPE_SYMBOL\x10\x04\x12\x1b\n" +
+	"\x17PASSWORD_TYPE_HEX_LOWER\x10\x05\x12\x1b\n" +
+	"\x17PASSWORD_TYPE_HEX_UPPER\x10\x06\x12\x19\n" +
+	"\x15PASSWORD_TYPE_UUID_V7\x10\a2\xaf\x01\n" +
 	"\aSidecar\x12T\n" +
-	"\rServiceStatus\x12 .sidecar.v1.ServiceStatusRequest\x1a!.sidecar.v1.ServiceStatusResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
+	"\rServiceStatus\x12 .sidecar.v1.ServiceStatusRequest\x1a!.sidecar.v1.ServiceStatusResponse\x12N\n" +
+	"\vPasswordGet\x12\x1e.sidecar.v1.PasswordGetRequest\x1a\x1f.sidecar.v1.PasswordGetResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
 
 var (
 	file_sidecar_v1_sidecar_proto_rawDescOnce sync.Once
@@ -251,21 +465,28 @@ func file_sidecar_v1_sidecar_proto_rawDescGZIP() []byte {
 	return file_sidecar_v1_sidecar_proto_rawDescData
 }
 
-var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_sidecar_v1_sidecar_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_sidecar_v1_sidecar_proto_goTypes = []any{
-	(*ServiceStatusRequest)(nil),  // 0: sidecar.v1.ServiceStatusRequest
-	(*ServiceStatusResponse)(nil), // 1: sidecar.v1.ServiceStatusResponse
-	(*ServiceStatus)(nil),         // 2: sidecar.v1.ServiceStatus
+	(PasswordType)(0),             // 0: sidecar.v1.PasswordType
+	(*ServiceStatusRequest)(nil),  // 1: sidecar.v1.ServiceStatusRequest
+	(*ServiceStatusResponse)(nil), // 2: sidecar.v1.ServiceStatusResponse
+	(*ServiceStatus)(nil),         // 3: sidecar.v1.ServiceStatus
+	(*PasswordGetRequest)(nil),    // 4: sidecar.v1.PasswordGetRequest
+	(*PasswordGetResponse)(nil),   // 5: sidecar.v1.PasswordGetResponse
 }
 var file_sidecar_v1_sidecar_proto_depIdxs = []int32{
-	2, // 0: sidecar.v1.ServiceStatusResponse.statuses:type_name -> sidecar.v1.ServiceStatus
-	0, // 1: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
-	1, // 2: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3, // 0: sidecar.v1.ServiceStatusResponse.statuses:type_name -> sidecar.v1.ServiceStatus
+	0, // 1: sidecar.v1.PasswordGetRequest.type:type_name -> sidecar.v1.PasswordType
+	1, // 2: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
+	4, // 3: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
+	2, // 4: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
+	5, // 5: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
+	4, // [4:6] is the sub-list for method output_type
+	2, // [2:4] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_sidecar_v1_sidecar_proto_init() }
@@ -279,13 +500,14 @@ func file_sidecar_v1_sidecar_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sidecar_v1_sidecar_proto_rawDesc), len(file_sidecar_v1_sidecar_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   3,
+			NumEnums:      1,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_sidecar_v1_sidecar_proto_goTypes,
 		DependencyIndexes: file_sidecar_v1_sidecar_proto_depIdxs,
+		EnumInfos:         file_sidecar_v1_sidecar_proto_enumTypes,
 		MessageInfos:      file_sidecar_v1_sidecar_proto_msgTypes,
 	}.Build()
 	File_sidecar_v1_sidecar_proto = out.File
