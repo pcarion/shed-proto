@@ -21,6 +21,12 @@ service Sidecar {
   rpc NetworkPortGet(NetworkPortGetRequest) returns (NetworkPortGetResponse);
   // NetworkList returns all stored network ports.
   rpc NetworkList(NetworkListRequest) returns (NetworkListResponse);
+  // ParamSet stores a parameter value.
+  rpc ParamSet(ParamSetRequest) returns (ParamSetResponse);
+  // ParamGet returns a stored parameter value.
+  rpc ParamGet(ParamGetRequest) returns (ParamGetResponse);
+  // ParamList returns all stored parameters grouped by service name.
+  rpc ParamList(ParamListRequest) returns (ParamListResponse);
 }
 
 enum PasswordType {
@@ -136,4 +142,39 @@ message NetworkEntry {
   string service_name = 1;
   string name = 2;
   int32 port = 3;
+}
+
+message ParamSetRequest {
+  string service_name = 1;
+  string name = 2;
+  string value = 3;
+}
+
+message ParamSetResponse {}
+
+message ParamGetRequest {
+  string service_name = 1;
+  string name = 2;
+}
+
+message ParamGetResponse {
+  string value = 1;
+}
+
+message ParamListRequest {}
+
+message ParamListResponse {
+  // services is ordered alphabetically by service_name.
+  repeated ParamService services = 1;
+}
+
+message ParamService {
+  string service_name = 1;
+  // params is ordered alphabetically by name.
+  repeated ParamEntry params = 2;
+}
+
+message ParamEntry {
+  string name = 1;
+  string value = 2;
 }

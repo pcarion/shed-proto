@@ -950,6 +950,384 @@ func (x *NetworkEntry) GetPort() int32 {
 	return 0
 }
 
+type ParamSetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ServiceName   string                 `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Value         string                 `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParamSetRequest) Reset() {
+	*x = ParamSetRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParamSetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParamSetRequest) ProtoMessage() {}
+
+func (x *ParamSetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParamSetRequest.ProtoReflect.Descriptor instead.
+func (*ParamSetRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ParamSetRequest) GetServiceName() string {
+	if x != nil {
+		return x.ServiceName
+	}
+	return ""
+}
+
+func (x *ParamSetRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ParamSetRequest) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+type ParamSetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParamSetResponse) Reset() {
+	*x = ParamSetResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParamSetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParamSetResponse) ProtoMessage() {}
+
+func (x *ParamSetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParamSetResponse.ProtoReflect.Descriptor instead.
+func (*ParamSetResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{17}
+}
+
+type ParamGetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ServiceName   string                 `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParamGetRequest) Reset() {
+	*x = ParamGetRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParamGetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParamGetRequest) ProtoMessage() {}
+
+func (x *ParamGetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParamGetRequest.ProtoReflect.Descriptor instead.
+func (*ParamGetRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ParamGetRequest) GetServiceName() string {
+	if x != nil {
+		return x.ServiceName
+	}
+	return ""
+}
+
+func (x *ParamGetRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type ParamGetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Value         string                 `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParamGetResponse) Reset() {
+	*x = ParamGetResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParamGetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParamGetResponse) ProtoMessage() {}
+
+func (x *ParamGetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParamGetResponse.ProtoReflect.Descriptor instead.
+func (*ParamGetResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ParamGetResponse) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+type ParamListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParamListRequest) Reset() {
+	*x = ParamListRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParamListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParamListRequest) ProtoMessage() {}
+
+func (x *ParamListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParamListRequest.ProtoReflect.Descriptor instead.
+func (*ParamListRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{20}
+}
+
+type ParamListResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// services is ordered alphabetically by service_name.
+	Services      []*ParamService `protobuf:"bytes,1,rep,name=services,proto3" json:"services,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParamListResponse) Reset() {
+	*x = ParamListResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParamListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParamListResponse) ProtoMessage() {}
+
+func (x *ParamListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParamListResponse.ProtoReflect.Descriptor instead.
+func (*ParamListResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ParamListResponse) GetServices() []*ParamService {
+	if x != nil {
+		return x.Services
+	}
+	return nil
+}
+
+type ParamService struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	ServiceName string                 `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
+	// params is ordered alphabetically by name.
+	Params        []*ParamEntry `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParamService) Reset() {
+	*x = ParamService{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParamService) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParamService) ProtoMessage() {}
+
+func (x *ParamService) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParamService.ProtoReflect.Descriptor instead.
+func (*ParamService) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *ParamService) GetServiceName() string {
+	if x != nil {
+		return x.ServiceName
+	}
+	return ""
+}
+
+func (x *ParamService) GetParams() []*ParamEntry {
+	if x != nil {
+		return x.Params
+	}
+	return nil
+}
+
+type ParamEntry struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParamEntry) Reset() {
+	*x = ParamEntry{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParamEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParamEntry) ProtoMessage() {}
+
+func (x *ParamEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParamEntry.ProtoReflect.Descriptor instead.
+func (*ParamEntry) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ParamEntry) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ParamEntry) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
 var File_sidecar_v1_sidecar_proto protoreflect.FileDescriptor
 
 const file_sidecar_v1_sidecar_proto_rawDesc = "" +
@@ -1007,7 +1385,27 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\fNetworkEntry\x12!\n" +
 	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
-	"\x04port\x18\x03 \x01(\x05R\x04port*\xef\x01\n" +
+	"\x04port\x18\x03 \x01(\x05R\x04port\"^\n" +
+	"\x0fParamSetRequest\x12!\n" +
+	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05value\x18\x03 \x01(\tR\x05value\"\x12\n" +
+	"\x10ParamSetResponse\"H\n" +
+	"\x0fParamGetRequest\x12!\n" +
+	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"(\n" +
+	"\x10ParamGetResponse\x12\x14\n" +
+	"\x05value\x18\x01 \x01(\tR\x05value\"\x12\n" +
+	"\x10ParamListRequest\"I\n" +
+	"\x11ParamListResponse\x124\n" +
+	"\bservices\x18\x01 \x03(\v2\x18.sidecar.v1.ParamServiceR\bservices\"a\n" +
+	"\fParamService\x12!\n" +
+	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12.\n" +
+	"\x06params\x18\x02 \x03(\v2\x16.sidecar.v1.ParamEntryR\x06params\"6\n" +
+	"\n" +
+	"ParamEntry\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value*\xef\x01\n" +
 	"\fPasswordType\x12\x1d\n" +
 	"\x19PASSWORD_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_LOWERCASE\x10\x01\x12\x1b\n" +
@@ -1016,14 +1414,17 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\x14PASSWORD_TYPE_SYMBOL\x10\x04\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_HEX_LOWER\x10\x05\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_HEX_UPPER\x10\x06\x12\x19\n" +
-	"\x15PASSWORD_TYPE_UUID_V7\x10\a2\xfe\x03\n" +
+	"\x15PASSWORD_TYPE_UUID_V7\x10\a2\xd6\x05\n" +
 	"\aSidecar\x12T\n" +
 	"\rServiceStatus\x12 .sidecar.v1.ServiceStatusRequest\x1a!.sidecar.v1.ServiceStatusResponse\x12N\n" +
 	"\vPasswordGet\x12\x1e.sidecar.v1.PasswordGetRequest\x1a\x1f.sidecar.v1.PasswordGetResponse\x12Q\n" +
 	"\fPasswordRead\x12\x1f.sidecar.v1.PasswordReadRequest\x1a .sidecar.v1.PasswordReadResponse\x12Q\n" +
 	"\fPasswordList\x12\x1f.sidecar.v1.PasswordListRequest\x1a .sidecar.v1.PasswordListResponse\x12W\n" +
 	"\x0eNetworkPortGet\x12!.sidecar.v1.NetworkPortGetRequest\x1a\".sidecar.v1.NetworkPortGetResponse\x12N\n" +
-	"\vNetworkList\x12\x1e.sidecar.v1.NetworkListRequest\x1a\x1f.sidecar.v1.NetworkListResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
+	"\vNetworkList\x12\x1e.sidecar.v1.NetworkListRequest\x1a\x1f.sidecar.v1.NetworkListResponse\x12E\n" +
+	"\bParamSet\x12\x1b.sidecar.v1.ParamSetRequest\x1a\x1c.sidecar.v1.ParamSetResponse\x12E\n" +
+	"\bParamGet\x12\x1b.sidecar.v1.ParamGetRequest\x1a\x1c.sidecar.v1.ParamGetResponse\x12H\n" +
+	"\tParamList\x12\x1c.sidecar.v1.ParamListRequest\x1a\x1d.sidecar.v1.ParamListResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
 
 var (
 	file_sidecar_v1_sidecar_proto_rawDescOnce sync.Once
@@ -1038,7 +1439,7 @@ func file_sidecar_v1_sidecar_proto_rawDescGZIP() []byte {
 }
 
 var file_sidecar_v1_sidecar_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_sidecar_v1_sidecar_proto_goTypes = []any{
 	(PasswordType)(0),              // 0: sidecar.v1.PasswordType
 	(*ServiceStatusRequest)(nil),   // 1: sidecar.v1.ServiceStatusRequest
@@ -1057,6 +1458,14 @@ var file_sidecar_v1_sidecar_proto_goTypes = []any{
 	(*NetworkListRequest)(nil),     // 14: sidecar.v1.NetworkListRequest
 	(*NetworkListResponse)(nil),    // 15: sidecar.v1.NetworkListResponse
 	(*NetworkEntry)(nil),           // 16: sidecar.v1.NetworkEntry
+	(*ParamSetRequest)(nil),        // 17: sidecar.v1.ParamSetRequest
+	(*ParamSetResponse)(nil),       // 18: sidecar.v1.ParamSetResponse
+	(*ParamGetRequest)(nil),        // 19: sidecar.v1.ParamGetRequest
+	(*ParamGetResponse)(nil),       // 20: sidecar.v1.ParamGetResponse
+	(*ParamListRequest)(nil),       // 21: sidecar.v1.ParamListRequest
+	(*ParamListResponse)(nil),      // 22: sidecar.v1.ParamListResponse
+	(*ParamService)(nil),           // 23: sidecar.v1.ParamService
+	(*ParamEntry)(nil),             // 24: sidecar.v1.ParamEntry
 }
 var file_sidecar_v1_sidecar_proto_depIdxs = []int32{
 	3,  // 0: sidecar.v1.ServiceStatusResponse.statuses:type_name -> sidecar.v1.ServiceStatus
@@ -1064,23 +1473,31 @@ var file_sidecar_v1_sidecar_proto_depIdxs = []int32{
 	10, // 2: sidecar.v1.PasswordListResponse.services:type_name -> sidecar.v1.PasswordService
 	11, // 3: sidecar.v1.PasswordService.passwords:type_name -> sidecar.v1.PasswordEntry
 	16, // 4: sidecar.v1.NetworkListResponse.networks:type_name -> sidecar.v1.NetworkEntry
-	1,  // 5: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
-	4,  // 6: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
-	6,  // 7: sidecar.v1.Sidecar.PasswordRead:input_type -> sidecar.v1.PasswordReadRequest
-	8,  // 8: sidecar.v1.Sidecar.PasswordList:input_type -> sidecar.v1.PasswordListRequest
-	12, // 9: sidecar.v1.Sidecar.NetworkPortGet:input_type -> sidecar.v1.NetworkPortGetRequest
-	14, // 10: sidecar.v1.Sidecar.NetworkList:input_type -> sidecar.v1.NetworkListRequest
-	2,  // 11: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
-	5,  // 12: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
-	7,  // 13: sidecar.v1.Sidecar.PasswordRead:output_type -> sidecar.v1.PasswordReadResponse
-	9,  // 14: sidecar.v1.Sidecar.PasswordList:output_type -> sidecar.v1.PasswordListResponse
-	13, // 15: sidecar.v1.Sidecar.NetworkPortGet:output_type -> sidecar.v1.NetworkPortGetResponse
-	15, // 16: sidecar.v1.Sidecar.NetworkList:output_type -> sidecar.v1.NetworkListResponse
-	11, // [11:17] is the sub-list for method output_type
-	5,  // [5:11] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	23, // 5: sidecar.v1.ParamListResponse.services:type_name -> sidecar.v1.ParamService
+	24, // 6: sidecar.v1.ParamService.params:type_name -> sidecar.v1.ParamEntry
+	1,  // 7: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
+	4,  // 8: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
+	6,  // 9: sidecar.v1.Sidecar.PasswordRead:input_type -> sidecar.v1.PasswordReadRequest
+	8,  // 10: sidecar.v1.Sidecar.PasswordList:input_type -> sidecar.v1.PasswordListRequest
+	12, // 11: sidecar.v1.Sidecar.NetworkPortGet:input_type -> sidecar.v1.NetworkPortGetRequest
+	14, // 12: sidecar.v1.Sidecar.NetworkList:input_type -> sidecar.v1.NetworkListRequest
+	17, // 13: sidecar.v1.Sidecar.ParamSet:input_type -> sidecar.v1.ParamSetRequest
+	19, // 14: sidecar.v1.Sidecar.ParamGet:input_type -> sidecar.v1.ParamGetRequest
+	21, // 15: sidecar.v1.Sidecar.ParamList:input_type -> sidecar.v1.ParamListRequest
+	2,  // 16: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
+	5,  // 17: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
+	7,  // 18: sidecar.v1.Sidecar.PasswordRead:output_type -> sidecar.v1.PasswordReadResponse
+	9,  // 19: sidecar.v1.Sidecar.PasswordList:output_type -> sidecar.v1.PasswordListResponse
+	13, // 20: sidecar.v1.Sidecar.NetworkPortGet:output_type -> sidecar.v1.NetworkPortGetResponse
+	15, // 21: sidecar.v1.Sidecar.NetworkList:output_type -> sidecar.v1.NetworkListResponse
+	18, // 22: sidecar.v1.Sidecar.ParamSet:output_type -> sidecar.v1.ParamSetResponse
+	20, // 23: sidecar.v1.Sidecar.ParamGet:output_type -> sidecar.v1.ParamGetResponse
+	22, // 24: sidecar.v1.Sidecar.ParamList:output_type -> sidecar.v1.ParamListResponse
+	16, // [16:25] is the sub-list for method output_type
+	7,  // [7:16] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_sidecar_v1_sidecar_proto_init() }
@@ -1095,7 +1512,7 @@ func file_sidecar_v1_sidecar_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sidecar_v1_sidecar_proto_rawDesc), len(file_sidecar_v1_sidecar_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   16,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
