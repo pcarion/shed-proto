@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package sidecar.v1;
+
+option go_package = "github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1";
+
+// Sidecar is the service exposed by the shed-sidecar daemon running on Ubuntu
+// VMs managed via Hetzner. Clients connect through SSH tunnels using
+// insecure.NewCredentials() — TLS is not used because the tunnel provides the
+// transport security.
+service Sidecar {
+  // ServiceStatus returns the systemd status for one or more services.
+  rpc ServiceStatus(ServiceStatusRequest) returns (ServiceStatusResponse);
+}
+
+message ServiceStatusRequest {
+  // services is the list of systemd unit names to query (e.g. "nginx.service").
+  repeated string services = 1;
+}
+
+message ServiceStatusResponse {
+  repeated ServiceStatus statuses = 1;
+}
+
+// ServiceStatus mirrors the fields returned by systemctl show / D-Bus
+// org.freedesktop.systemd1 for a single unit.
+message ServiceStatus {
+  string name = 1;
+  string load_state = 2;
+  string active_state = 3;
+  string sub_state = 4;
+  string description = 5;
+  int64 main_pid = 6;
+  // raw holds the full `systemctl status` output; omitted when not requested.
+  optional string raw = 7;
+}
