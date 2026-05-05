@@ -4,9 +4,15 @@
 help:
 	@sed -n 's/^## //p' $(MAKEFILE_LIST) | column -t -s ':' | sed 's/^/  /'
 
-## generate: regenerate Go code from proto definitions (requires buf)
+## generate: regenerate Go code from proto definitions (requires protoc, protoc-gen-go, protoc-gen-go-grpc)
 generate:
-	buf generate
+	protoc \
+		--proto_path=proto \
+		--go_out=gen/go \
+		--go_opt=paths=source_relative \
+		--go-grpc_out=gen/go \
+		--go-grpc_opt=paths=source_relative \
+		$(shell find proto -name '*.proto')
 	go mod tidy
 
 ## lint: run buf lint on proto files
