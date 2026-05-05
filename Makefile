@@ -1,4 +1,4 @@
-.PHONY: help generate lint breaking build tidy check
+.PHONY: help generate lint breaking build tidy check tag-major tag-minor tag-patch tag
 
 ## help: list available targets
 help:
@@ -34,3 +34,35 @@ tidy:
 
 ## check: lint + build (run before pushing)
 check: lint build
+
+## tag-major: create and push the next major version tag
+tag-major:
+	@$(MAKE) --no-print-directory tag PART=major
+
+## tag-minor: create and push the next minor version tag
+tag-minor:
+	@$(MAKE) --no-print-directory tag PART=minor
+
+## tag-patch: create and push the next patch version tag
+tag-patch:
+	@$(MAKE) --no-print-directory tag PART=patch
+
+tag:
+	@git fetch --tags --quiet
+	@latest=$$(git tag --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | awk '/^v[0-9]+\.[0-9]+\.[0-9]+$$/ { print; exit }'); \
+	if [ -z "$$latest" ]; then latest=v0.1.0; fi; \
+	version=$${latest#v}; \
+	major=$${version%%.*}; \
+	rest=$${version#*.}; \
+	minor=$${rest%%.*}; \
+	patch=$${rest#*.}; \
+	case "$(PART)" in \
+		major) major=$$((major + 1)); minor=0; patch=0 ;; \
+		minor) minor=$$((minor + 1)); patch=0 ;; \
+		patch) patch=$$((patch + 1)) ;; \
+		*) echo "PART must be major, minor, or patch" >&2; exit 1 ;; \
+	esac; \
+	tag="v$$major.$$minor.$$patch"; \
+	git tag "$$tag"; \
+	git push origin "$$tag"; \
+	echo "Created and pushed $$tag"

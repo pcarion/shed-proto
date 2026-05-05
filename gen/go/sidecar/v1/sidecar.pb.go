@@ -24,7 +24,9 @@ const (
 type ServiceStatusRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// services is the list of systemd unit names to query (e.g. "nginx.service").
-	Services      []string `protobuf:"bytes,1,rep,name=services,proto3" json:"services,omitempty"`
+	Services []string `protobuf:"bytes,1,rep,name=services,proto3" json:"services,omitempty"`
+	// include_raw requests the full `systemctl status` output in each status.
+	IncludeRaw    bool `protobuf:"varint,2,opt,name=include_raw,json=includeRaw,proto3" json:"include_raw,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -64,6 +66,13 @@ func (x *ServiceStatusRequest) GetServices() []string {
 		return x.Services
 	}
 	return nil
+}
+
+func (x *ServiceStatusRequest) GetIncludeRaw() bool {
+	if x != nil {
+		return x.IncludeRaw
+	}
+	return false
 }
 
 type ServiceStatusResponse struct {
@@ -210,9 +219,11 @@ var File_sidecar_v1_sidecar_proto protoreflect.FileDescriptor
 const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\n" +
 	"\x18sidecar/v1/sidecar.proto\x12\n" +
-	"sidecar.v1\"2\n" +
+	"sidecar.v1\"S\n" +
 	"\x14ServiceStatusRequest\x12\x1a\n" +
-	"\bservices\x18\x01 \x03(\tR\bservices\"N\n" +
+	"\bservices\x18\x01 \x03(\tR\bservices\x12\x1f\n" +
+	"\vinclude_raw\x18\x02 \x01(\bR\n" +
+	"includeRaw\"N\n" +
 	"\x15ServiceStatusResponse\x125\n" +
 	"\bstatuses\x18\x01 \x03(\v2\x19.sidecar.v1.ServiceStatusR\bstatuses\"\xde\x01\n" +
 	"\rServiceStatus\x12\x12\n" +

@@ -16,6 +16,8 @@ service Sidecar {
 message ServiceStatusRequest {
   // services is the list of systemd unit names to query (e.g. "nginx.service").
   repeated string services = 1;
+  // include_raw requests the full `systemctl status` output in each status.
+  bool include_raw = 2;
 }
 
 message ServiceStatusResponse {
