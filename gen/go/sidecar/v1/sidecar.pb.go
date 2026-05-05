@@ -703,6 +703,253 @@ func (x *PasswordEntry) GetPassword() string {
 	return ""
 }
 
+type NetworkPortGetRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// service_name is the name of the service requesting a network port.
+	ServiceName string `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
+	// name is the name of the network port.
+	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NetworkPortGetRequest) Reset() {
+	*x = NetworkPortGetRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NetworkPortGetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NetworkPortGetRequest) ProtoMessage() {}
+
+func (x *NetworkPortGetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NetworkPortGetRequest.ProtoReflect.Descriptor instead.
+func (*NetworkPortGetRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *NetworkPortGetRequest) GetServiceName() string {
+	if x != nil {
+		return x.ServiceName
+	}
+	return ""
+}
+
+func (x *NetworkPortGetRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type NetworkPortGetResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Port  int32                  `protobuf:"varint,1,opt,name=port,proto3" json:"port,omitempty"`
+	// is_new is true when the network port was just created.
+	IsNew         bool `protobuf:"varint,2,opt,name=is_new,json=isNew,proto3" json:"is_new,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NetworkPortGetResponse) Reset() {
+	*x = NetworkPortGetResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NetworkPortGetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NetworkPortGetResponse) ProtoMessage() {}
+
+func (x *NetworkPortGetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NetworkPortGetResponse.ProtoReflect.Descriptor instead.
+func (*NetworkPortGetResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *NetworkPortGetResponse) GetPort() int32 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+func (x *NetworkPortGetResponse) GetIsNew() bool {
+	if x != nil {
+		return x.IsNew
+	}
+	return false
+}
+
+type NetworkListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NetworkListRequest) Reset() {
+	*x = NetworkListRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NetworkListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NetworkListRequest) ProtoMessage() {}
+
+func (x *NetworkListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NetworkListRequest.ProtoReflect.Descriptor instead.
+func (*NetworkListRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{13}
+}
+
+type NetworkListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Networks      []*NetworkEntry        `protobuf:"bytes,1,rep,name=networks,proto3" json:"networks,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NetworkListResponse) Reset() {
+	*x = NetworkListResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NetworkListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NetworkListResponse) ProtoMessage() {}
+
+func (x *NetworkListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NetworkListResponse.ProtoReflect.Descriptor instead.
+func (*NetworkListResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *NetworkListResponse) GetNetworks() []*NetworkEntry {
+	if x != nil {
+		return x.Networks
+	}
+	return nil
+}
+
+type NetworkEntry struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ServiceName   string                 `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Port          int32                  `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NetworkEntry) Reset() {
+	*x = NetworkEntry{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NetworkEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NetworkEntry) ProtoMessage() {}
+
+func (x *NetworkEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NetworkEntry.ProtoReflect.Descriptor instead.
+func (*NetworkEntry) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *NetworkEntry) GetServiceName() string {
+	if x != nil {
+		return x.ServiceName
+	}
+	return ""
+}
+
+func (x *NetworkEntry) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *NetworkEntry) GetPort() int32 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
 var File_sidecar_v1_sidecar_proto protoreflect.FileDescriptor
 
 const file_sidecar_v1_sidecar_proto_rawDesc = "" +
@@ -747,7 +994,20 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\tpasswords\x18\x02 \x03(\v2\x19.sidecar.v1.PasswordEntryR\tpasswords\"?\n" +
 	"\rPasswordEntry\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword*\xef\x01\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"N\n" +
+	"\x15NetworkPortGetRequest\x12!\n" +
+	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"C\n" +
+	"\x16NetworkPortGetResponse\x12\x12\n" +
+	"\x04port\x18\x01 \x01(\x05R\x04port\x12\x15\n" +
+	"\x06is_new\x18\x02 \x01(\bR\x05isNew\"\x14\n" +
+	"\x12NetworkListRequest\"K\n" +
+	"\x13NetworkListResponse\x124\n" +
+	"\bnetworks\x18\x01 \x03(\v2\x18.sidecar.v1.NetworkEntryR\bnetworks\"Y\n" +
+	"\fNetworkEntry\x12!\n" +
+	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
+	"\x04port\x18\x03 \x01(\x05R\x04port*\xef\x01\n" +
 	"\fPasswordType\x12\x1d\n" +
 	"\x19PASSWORD_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_LOWERCASE\x10\x01\x12\x1b\n" +
@@ -756,12 +1016,14 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\x14PASSWORD_TYPE_SYMBOL\x10\x04\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_HEX_LOWER\x10\x05\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_HEX_UPPER\x10\x06\x12\x19\n" +
-	"\x15PASSWORD_TYPE_UUID_V7\x10\a2\xd5\x02\n" +
+	"\x15PASSWORD_TYPE_UUID_V7\x10\a2\xfe\x03\n" +
 	"\aSidecar\x12T\n" +
 	"\rServiceStatus\x12 .sidecar.v1.ServiceStatusRequest\x1a!.sidecar.v1.ServiceStatusResponse\x12N\n" +
 	"\vPasswordGet\x12\x1e.sidecar.v1.PasswordGetRequest\x1a\x1f.sidecar.v1.PasswordGetResponse\x12Q\n" +
 	"\fPasswordRead\x12\x1f.sidecar.v1.PasswordReadRequest\x1a .sidecar.v1.PasswordReadResponse\x12Q\n" +
-	"\fPasswordList\x12\x1f.sidecar.v1.PasswordListRequest\x1a .sidecar.v1.PasswordListResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
+	"\fPasswordList\x12\x1f.sidecar.v1.PasswordListRequest\x1a .sidecar.v1.PasswordListResponse\x12W\n" +
+	"\x0eNetworkPortGet\x12!.sidecar.v1.NetworkPortGetRequest\x1a\".sidecar.v1.NetworkPortGetResponse\x12N\n" +
+	"\vNetworkList\x12\x1e.sidecar.v1.NetworkListRequest\x1a\x1f.sidecar.v1.NetworkListResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
 
 var (
 	file_sidecar_v1_sidecar_proto_rawDescOnce sync.Once
@@ -776,39 +1038,49 @@ func file_sidecar_v1_sidecar_proto_rawDescGZIP() []byte {
 }
 
 var file_sidecar_v1_sidecar_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_sidecar_v1_sidecar_proto_goTypes = []any{
-	(PasswordType)(0),             // 0: sidecar.v1.PasswordType
-	(*ServiceStatusRequest)(nil),  // 1: sidecar.v1.ServiceStatusRequest
-	(*ServiceStatusResponse)(nil), // 2: sidecar.v1.ServiceStatusResponse
-	(*ServiceStatus)(nil),         // 3: sidecar.v1.ServiceStatus
-	(*PasswordGetRequest)(nil),    // 4: sidecar.v1.PasswordGetRequest
-	(*PasswordGetResponse)(nil),   // 5: sidecar.v1.PasswordGetResponse
-	(*PasswordReadRequest)(nil),   // 6: sidecar.v1.PasswordReadRequest
-	(*PasswordReadResponse)(nil),  // 7: sidecar.v1.PasswordReadResponse
-	(*PasswordListRequest)(nil),   // 8: sidecar.v1.PasswordListRequest
-	(*PasswordListResponse)(nil),  // 9: sidecar.v1.PasswordListResponse
-	(*PasswordService)(nil),       // 10: sidecar.v1.PasswordService
-	(*PasswordEntry)(nil),         // 11: sidecar.v1.PasswordEntry
+	(PasswordType)(0),              // 0: sidecar.v1.PasswordType
+	(*ServiceStatusRequest)(nil),   // 1: sidecar.v1.ServiceStatusRequest
+	(*ServiceStatusResponse)(nil),  // 2: sidecar.v1.ServiceStatusResponse
+	(*ServiceStatus)(nil),          // 3: sidecar.v1.ServiceStatus
+	(*PasswordGetRequest)(nil),     // 4: sidecar.v1.PasswordGetRequest
+	(*PasswordGetResponse)(nil),    // 5: sidecar.v1.PasswordGetResponse
+	(*PasswordReadRequest)(nil),    // 6: sidecar.v1.PasswordReadRequest
+	(*PasswordReadResponse)(nil),   // 7: sidecar.v1.PasswordReadResponse
+	(*PasswordListRequest)(nil),    // 8: sidecar.v1.PasswordListRequest
+	(*PasswordListResponse)(nil),   // 9: sidecar.v1.PasswordListResponse
+	(*PasswordService)(nil),        // 10: sidecar.v1.PasswordService
+	(*PasswordEntry)(nil),          // 11: sidecar.v1.PasswordEntry
+	(*NetworkPortGetRequest)(nil),  // 12: sidecar.v1.NetworkPortGetRequest
+	(*NetworkPortGetResponse)(nil), // 13: sidecar.v1.NetworkPortGetResponse
+	(*NetworkListRequest)(nil),     // 14: sidecar.v1.NetworkListRequest
+	(*NetworkListResponse)(nil),    // 15: sidecar.v1.NetworkListResponse
+	(*NetworkEntry)(nil),           // 16: sidecar.v1.NetworkEntry
 }
 var file_sidecar_v1_sidecar_proto_depIdxs = []int32{
 	3,  // 0: sidecar.v1.ServiceStatusResponse.statuses:type_name -> sidecar.v1.ServiceStatus
 	0,  // 1: sidecar.v1.PasswordGetRequest.type:type_name -> sidecar.v1.PasswordType
 	10, // 2: sidecar.v1.PasswordListResponse.services:type_name -> sidecar.v1.PasswordService
 	11, // 3: sidecar.v1.PasswordService.passwords:type_name -> sidecar.v1.PasswordEntry
-	1,  // 4: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
-	4,  // 5: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
-	6,  // 6: sidecar.v1.Sidecar.PasswordRead:input_type -> sidecar.v1.PasswordReadRequest
-	8,  // 7: sidecar.v1.Sidecar.PasswordList:input_type -> sidecar.v1.PasswordListRequest
-	2,  // 8: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
-	5,  // 9: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
-	7,  // 10: sidecar.v1.Sidecar.PasswordRead:output_type -> sidecar.v1.PasswordReadResponse
-	9,  // 11: sidecar.v1.Sidecar.PasswordList:output_type -> sidecar.v1.PasswordListResponse
-	8,  // [8:12] is the sub-list for method output_type
-	4,  // [4:8] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	16, // 4: sidecar.v1.NetworkListResponse.networks:type_name -> sidecar.v1.NetworkEntry
+	1,  // 5: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
+	4,  // 6: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
+	6,  // 7: sidecar.v1.Sidecar.PasswordRead:input_type -> sidecar.v1.PasswordReadRequest
+	8,  // 8: sidecar.v1.Sidecar.PasswordList:input_type -> sidecar.v1.PasswordListRequest
+	12, // 9: sidecar.v1.Sidecar.NetworkPortGet:input_type -> sidecar.v1.NetworkPortGetRequest
+	14, // 10: sidecar.v1.Sidecar.NetworkList:input_type -> sidecar.v1.NetworkListRequest
+	2,  // 11: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
+	5,  // 12: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
+	7,  // 13: sidecar.v1.Sidecar.PasswordRead:output_type -> sidecar.v1.PasswordReadResponse
+	9,  // 14: sidecar.v1.Sidecar.PasswordList:output_type -> sidecar.v1.PasswordListResponse
+	13, // 15: sidecar.v1.Sidecar.NetworkPortGet:output_type -> sidecar.v1.NetworkPortGetResponse
+	15, // 16: sidecar.v1.Sidecar.NetworkList:output_type -> sidecar.v1.NetworkListResponse
+	11, // [11:17] is the sub-list for method output_type
+	5,  // [5:11] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_sidecar_v1_sidecar_proto_init() }
@@ -823,7 +1095,7 @@ func file_sidecar_v1_sidecar_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sidecar_v1_sidecar_proto_rawDesc), len(file_sidecar_v1_sidecar_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   11,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

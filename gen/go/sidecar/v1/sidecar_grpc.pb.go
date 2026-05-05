@@ -19,10 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Sidecar_ServiceStatus_FullMethodName = "/sidecar.v1.Sidecar/ServiceStatus"
-	Sidecar_PasswordGet_FullMethodName   = "/sidecar.v1.Sidecar/PasswordGet"
-	Sidecar_PasswordRead_FullMethodName  = "/sidecar.v1.Sidecar/PasswordRead"
-	Sidecar_PasswordList_FullMethodName  = "/sidecar.v1.Sidecar/PasswordList"
+	Sidecar_ServiceStatus_FullMethodName  = "/sidecar.v1.Sidecar/ServiceStatus"
+	Sidecar_PasswordGet_FullMethodName    = "/sidecar.v1.Sidecar/PasswordGet"
+	Sidecar_PasswordRead_FullMethodName   = "/sidecar.v1.Sidecar/PasswordRead"
+	Sidecar_PasswordList_FullMethodName   = "/sidecar.v1.Sidecar/PasswordList"
+	Sidecar_NetworkPortGet_FullMethodName = "/sidecar.v1.Sidecar/NetworkPortGet"
+	Sidecar_NetworkList_FullMethodName    = "/sidecar.v1.Sidecar/NetworkList"
 )
 
 // SidecarClient is the client API for Sidecar service.
@@ -42,6 +44,10 @@ type SidecarClient interface {
 	PasswordRead(ctx context.Context, in *PasswordReadRequest, opts ...grpc.CallOption) (*PasswordReadResponse, error)
 	// PasswordList returns all stored passwords grouped by service name.
 	PasswordList(ctx context.Context, in *PasswordListRequest, opts ...grpc.CallOption) (*PasswordListResponse, error)
+	// NetworkPortGet returns an existing network port or creates a new one.
+	NetworkPortGet(ctx context.Context, in *NetworkPortGetRequest, opts ...grpc.CallOption) (*NetworkPortGetResponse, error)
+	// NetworkList returns all stored network ports.
+	NetworkList(ctx context.Context, in *NetworkListRequest, opts ...grpc.CallOption) (*NetworkListResponse, error)
 }
 
 type sidecarClient struct {
@@ -92,6 +98,26 @@ func (c *sidecarClient) PasswordList(ctx context.Context, in *PasswordListReques
 	return out, nil
 }
 
+func (c *sidecarClient) NetworkPortGet(ctx context.Context, in *NetworkPortGetRequest, opts ...grpc.CallOption) (*NetworkPortGetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NetworkPortGetResponse)
+	err := c.cc.Invoke(ctx, Sidecar_NetworkPortGet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sidecarClient) NetworkList(ctx context.Context, in *NetworkListRequest, opts ...grpc.CallOption) (*NetworkListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NetworkListResponse)
+	err := c.cc.Invoke(ctx, Sidecar_NetworkList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SidecarServer is the server API for Sidecar service.
 // All implementations must embed UnimplementedSidecarServer
 // for forward compatibility.
@@ -109,6 +135,10 @@ type SidecarServer interface {
 	PasswordRead(context.Context, *PasswordReadRequest) (*PasswordReadResponse, error)
 	// PasswordList returns all stored passwords grouped by service name.
 	PasswordList(context.Context, *PasswordListRequest) (*PasswordListResponse, error)
+	// NetworkPortGet returns an existing network port or creates a new one.
+	NetworkPortGet(context.Context, *NetworkPortGetRequest) (*NetworkPortGetResponse, error)
+	// NetworkList returns all stored network ports.
+	NetworkList(context.Context, *NetworkListRequest) (*NetworkListResponse, error)
 	mustEmbedUnimplementedSidecarServer()
 }
 
@@ -130,6 +160,12 @@ func (UnimplementedSidecarServer) PasswordRead(context.Context, *PasswordReadReq
 }
 func (UnimplementedSidecarServer) PasswordList(context.Context, *PasswordListRequest) (*PasswordListResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method PasswordList not implemented")
+}
+func (UnimplementedSidecarServer) NetworkPortGet(context.Context, *NetworkPortGetRequest) (*NetworkPortGetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method NetworkPortGet not implemented")
+}
+func (UnimplementedSidecarServer) NetworkList(context.Context, *NetworkListRequest) (*NetworkListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method NetworkList not implemented")
 }
 func (UnimplementedSidecarServer) mustEmbedUnimplementedSidecarServer() {}
 func (UnimplementedSidecarServer) testEmbeddedByValue()                 {}
@@ -224,6 +260,42 @@ func _Sidecar_PasswordList_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sidecar_NetworkPortGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NetworkPortGetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SidecarServer).NetworkPortGet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Sidecar_NetworkPortGet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SidecarServer).NetworkPortGet(ctx, req.(*NetworkPortGetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sidecar_NetworkList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NetworkListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SidecarServer).NetworkList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Sidecar_NetworkList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SidecarServer).NetworkList(ctx, req.(*NetworkListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Sidecar_ServiceDesc is the grpc.ServiceDesc for Sidecar service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -246,6 +318,14 @@ var Sidecar_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PasswordList",
 			Handler:    _Sidecar_PasswordList_Handler,
+		},
+		{
+			MethodName: "NetworkPortGet",
+			Handler:    _Sidecar_NetworkPortGet_Handler,
+		},
+		{
+			MethodName: "NetworkList",
+			Handler:    _Sidecar_NetworkList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

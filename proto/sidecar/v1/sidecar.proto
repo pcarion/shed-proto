@@ -17,6 +17,10 @@ service Sidecar {
   rpc PasswordRead(PasswordReadRequest) returns (PasswordReadResponse);
   // PasswordList returns all stored passwords grouped by service name.
   rpc PasswordList(PasswordListRequest) returns (PasswordListResponse);
+  // NetworkPortGet returns an existing network port or creates a new one.
+  rpc NetworkPortGet(NetworkPortGetRequest) returns (NetworkPortGetResponse);
+  // NetworkList returns all stored network ports.
+  rpc NetworkList(NetworkListRequest) returns (NetworkListResponse);
 }
 
 enum PasswordType {
@@ -107,4 +111,29 @@ message PasswordService {
 message PasswordEntry {
   string name = 1;
   string password = 2;
+}
+
+message NetworkPortGetRequest {
+  // service_name is the name of the service requesting a network port.
+  string service_name = 1;
+  // name is the name of the network port.
+  string name = 2;
+}
+
+message NetworkPortGetResponse {
+  int32 port = 1;
+  // is_new is true when the network port was just created.
+  bool is_new = 2;
+}
+
+message NetworkListRequest {}
+
+message NetworkListResponse {
+  repeated NetworkEntry networks = 1;
+}
+
+message NetworkEntry {
+  string service_name = 1;
+  string name = 2;
+  int32 port = 3;
 }
