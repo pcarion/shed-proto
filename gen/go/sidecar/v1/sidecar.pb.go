@@ -410,6 +410,299 @@ func (x *PasswordGetResponse) GetIsNew() bool {
 	return false
 }
 
+type PasswordReadRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// service_name is the name of the service requesting a password.
+	ServiceName string `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
+	// name is the name of the password.
+	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordReadRequest) Reset() {
+	*x = PasswordReadRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordReadRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordReadRequest) ProtoMessage() {}
+
+func (x *PasswordReadRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordReadRequest.ProtoReflect.Descriptor instead.
+func (*PasswordReadRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *PasswordReadRequest) GetServiceName() string {
+	if x != nil {
+		return x.ServiceName
+	}
+	return ""
+}
+
+func (x *PasswordReadRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type PasswordReadResponse struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	Password string                 `protobuf:"bytes,1,opt,name=password,proto3" json:"password,omitempty"`
+	// is_ok is false when no password is found.
+	IsOk          bool `protobuf:"varint,2,opt,name=is_ok,json=isOk,proto3" json:"is_ok,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordReadResponse) Reset() {
+	*x = PasswordReadResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordReadResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordReadResponse) ProtoMessage() {}
+
+func (x *PasswordReadResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordReadResponse.ProtoReflect.Descriptor instead.
+func (*PasswordReadResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *PasswordReadResponse) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *PasswordReadResponse) GetIsOk() bool {
+	if x != nil {
+		return x.IsOk
+	}
+	return false
+}
+
+type PasswordListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordListRequest) Reset() {
+	*x = PasswordListRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordListRequest) ProtoMessage() {}
+
+func (x *PasswordListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordListRequest.ProtoReflect.Descriptor instead.
+func (*PasswordListRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{7}
+}
+
+type PasswordListResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// services is ordered alphabetically by service_name.
+	Services      []*PasswordService `protobuf:"bytes,1,rep,name=services,proto3" json:"services,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordListResponse) Reset() {
+	*x = PasswordListResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordListResponse) ProtoMessage() {}
+
+func (x *PasswordListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordListResponse.ProtoReflect.Descriptor instead.
+func (*PasswordListResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *PasswordListResponse) GetServices() []*PasswordService {
+	if x != nil {
+		return x.Services
+	}
+	return nil
+}
+
+type PasswordService struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	ServiceName string                 `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
+	// passwords is ordered alphabetically by name.
+	Passwords     []*PasswordEntry `protobuf:"bytes,2,rep,name=passwords,proto3" json:"passwords,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordService) Reset() {
+	*x = PasswordService{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordService) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordService) ProtoMessage() {}
+
+func (x *PasswordService) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordService.ProtoReflect.Descriptor instead.
+func (*PasswordService) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *PasswordService) GetServiceName() string {
+	if x != nil {
+		return x.ServiceName
+	}
+	return ""
+}
+
+func (x *PasswordService) GetPasswords() []*PasswordEntry {
+	if x != nil {
+		return x.Passwords
+	}
+	return nil
+}
+
+type PasswordEntry struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordEntry) Reset() {
+	*x = PasswordEntry{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordEntry) ProtoMessage() {}
+
+func (x *PasswordEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordEntry.ProtoReflect.Descriptor instead.
+func (*PasswordEntry) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *PasswordEntry) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PasswordEntry) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
 var File_sidecar_v1_sidecar_proto protoreflect.FileDescriptor
 
 const file_sidecar_v1_sidecar_proto_rawDesc = "" +
@@ -439,7 +732,22 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\x0e2\x18.sidecar.v1.PasswordTypeR\x04type\"H\n" +
 	"\x13PasswordGetResponse\x12\x1a\n" +
 	"\bpassword\x18\x01 \x01(\tR\bpassword\x12\x15\n" +
-	"\x06is_new\x18\x02 \x01(\bR\x05isNew*\xef\x01\n" +
+	"\x06is_new\x18\x02 \x01(\bR\x05isNew\"L\n" +
+	"\x13PasswordReadRequest\x12!\n" +
+	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"G\n" +
+	"\x14PasswordReadResponse\x12\x1a\n" +
+	"\bpassword\x18\x01 \x01(\tR\bpassword\x12\x13\n" +
+	"\x05is_ok\x18\x02 \x01(\bR\x04isOk\"\x15\n" +
+	"\x13PasswordListRequest\"O\n" +
+	"\x14PasswordListResponse\x127\n" +
+	"\bservices\x18\x01 \x03(\v2\x1b.sidecar.v1.PasswordServiceR\bservices\"m\n" +
+	"\x0fPasswordService\x12!\n" +
+	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x127\n" +
+	"\tpasswords\x18\x02 \x03(\v2\x19.sidecar.v1.PasswordEntryR\tpasswords\"?\n" +
+	"\rPasswordEntry\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword*\xef\x01\n" +
 	"\fPasswordType\x12\x1d\n" +
 	"\x19PASSWORD_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_LOWERCASE\x10\x01\x12\x1b\n" +
@@ -448,10 +756,12 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\x14PASSWORD_TYPE_SYMBOL\x10\x04\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_HEX_LOWER\x10\x05\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_HEX_UPPER\x10\x06\x12\x19\n" +
-	"\x15PASSWORD_TYPE_UUID_V7\x10\a2\xaf\x01\n" +
+	"\x15PASSWORD_TYPE_UUID_V7\x10\a2\xd5\x02\n" +
 	"\aSidecar\x12T\n" +
 	"\rServiceStatus\x12 .sidecar.v1.ServiceStatusRequest\x1a!.sidecar.v1.ServiceStatusResponse\x12N\n" +
-	"\vPasswordGet\x12\x1e.sidecar.v1.PasswordGetRequest\x1a\x1f.sidecar.v1.PasswordGetResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
+	"\vPasswordGet\x12\x1e.sidecar.v1.PasswordGetRequest\x1a\x1f.sidecar.v1.PasswordGetResponse\x12Q\n" +
+	"\fPasswordRead\x12\x1f.sidecar.v1.PasswordReadRequest\x1a .sidecar.v1.PasswordReadResponse\x12Q\n" +
+	"\fPasswordList\x12\x1f.sidecar.v1.PasswordListRequest\x1a .sidecar.v1.PasswordListResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
 
 var (
 	file_sidecar_v1_sidecar_proto_rawDescOnce sync.Once
@@ -466,7 +776,7 @@ func file_sidecar_v1_sidecar_proto_rawDescGZIP() []byte {
 }
 
 var file_sidecar_v1_sidecar_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_sidecar_v1_sidecar_proto_goTypes = []any{
 	(PasswordType)(0),             // 0: sidecar.v1.PasswordType
 	(*ServiceStatusRequest)(nil),  // 1: sidecar.v1.ServiceStatusRequest
@@ -474,19 +784,31 @@ var file_sidecar_v1_sidecar_proto_goTypes = []any{
 	(*ServiceStatus)(nil),         // 3: sidecar.v1.ServiceStatus
 	(*PasswordGetRequest)(nil),    // 4: sidecar.v1.PasswordGetRequest
 	(*PasswordGetResponse)(nil),   // 5: sidecar.v1.PasswordGetResponse
+	(*PasswordReadRequest)(nil),   // 6: sidecar.v1.PasswordReadRequest
+	(*PasswordReadResponse)(nil),  // 7: sidecar.v1.PasswordReadResponse
+	(*PasswordListRequest)(nil),   // 8: sidecar.v1.PasswordListRequest
+	(*PasswordListResponse)(nil),  // 9: sidecar.v1.PasswordListResponse
+	(*PasswordService)(nil),       // 10: sidecar.v1.PasswordService
+	(*PasswordEntry)(nil),         // 11: sidecar.v1.PasswordEntry
 }
 var file_sidecar_v1_sidecar_proto_depIdxs = []int32{
-	3, // 0: sidecar.v1.ServiceStatusResponse.statuses:type_name -> sidecar.v1.ServiceStatus
-	0, // 1: sidecar.v1.PasswordGetRequest.type:type_name -> sidecar.v1.PasswordType
-	1, // 2: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
-	4, // 3: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
-	2, // 4: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
-	5, // 5: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3,  // 0: sidecar.v1.ServiceStatusResponse.statuses:type_name -> sidecar.v1.ServiceStatus
+	0,  // 1: sidecar.v1.PasswordGetRequest.type:type_name -> sidecar.v1.PasswordType
+	10, // 2: sidecar.v1.PasswordListResponse.services:type_name -> sidecar.v1.PasswordService
+	11, // 3: sidecar.v1.PasswordService.passwords:type_name -> sidecar.v1.PasswordEntry
+	1,  // 4: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
+	4,  // 5: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
+	6,  // 6: sidecar.v1.Sidecar.PasswordRead:input_type -> sidecar.v1.PasswordReadRequest
+	8,  // 7: sidecar.v1.Sidecar.PasswordList:input_type -> sidecar.v1.PasswordListRequest
+	2,  // 8: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
+	5,  // 9: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
+	7,  // 10: sidecar.v1.Sidecar.PasswordRead:output_type -> sidecar.v1.PasswordReadResponse
+	9,  // 11: sidecar.v1.Sidecar.PasswordList:output_type -> sidecar.v1.PasswordListResponse
+	8,  // [8:12] is the sub-list for method output_type
+	4,  // [4:8] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_sidecar_v1_sidecar_proto_init() }
@@ -501,7 +823,7 @@ func file_sidecar_v1_sidecar_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sidecar_v1_sidecar_proto_rawDesc), len(file_sidecar_v1_sidecar_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   5,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

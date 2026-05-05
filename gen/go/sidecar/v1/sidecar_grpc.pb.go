@@ -21,6 +21,8 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Sidecar_ServiceStatus_FullMethodName = "/sidecar.v1.Sidecar/ServiceStatus"
 	Sidecar_PasswordGet_FullMethodName   = "/sidecar.v1.Sidecar/PasswordGet"
+	Sidecar_PasswordRead_FullMethodName  = "/sidecar.v1.Sidecar/PasswordRead"
+	Sidecar_PasswordList_FullMethodName  = "/sidecar.v1.Sidecar/PasswordList"
 )
 
 // SidecarClient is the client API for Sidecar service.
@@ -36,6 +38,10 @@ type SidecarClient interface {
 	ServiceStatus(ctx context.Context, in *ServiceStatusRequest, opts ...grpc.CallOption) (*ServiceStatusResponse, error)
 	// PasswordGet returns an existing password or creates a new one.
 	PasswordGet(ctx context.Context, in *PasswordGetRequest, opts ...grpc.CallOption) (*PasswordGetResponse, error)
+	// PasswordRead returns a stored password without creating it.
+	PasswordRead(ctx context.Context, in *PasswordReadRequest, opts ...grpc.CallOption) (*PasswordReadResponse, error)
+	// PasswordList returns all stored passwords grouped by service name.
+	PasswordList(ctx context.Context, in *PasswordListRequest, opts ...grpc.CallOption) (*PasswordListResponse, error)
 }
 
 type sidecarClient struct {
@@ -66,6 +72,26 @@ func (c *sidecarClient) PasswordGet(ctx context.Context, in *PasswordGetRequest,
 	return out, nil
 }
 
+func (c *sidecarClient) PasswordRead(ctx context.Context, in *PasswordReadRequest, opts ...grpc.CallOption) (*PasswordReadResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PasswordReadResponse)
+	err := c.cc.Invoke(ctx, Sidecar_PasswordRead_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sidecarClient) PasswordList(ctx context.Context, in *PasswordListRequest, opts ...grpc.CallOption) (*PasswordListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PasswordListResponse)
+	err := c.cc.Invoke(ctx, Sidecar_PasswordList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SidecarServer is the server API for Sidecar service.
 // All implementations must embed UnimplementedSidecarServer
 // for forward compatibility.
@@ -79,6 +105,10 @@ type SidecarServer interface {
 	ServiceStatus(context.Context, *ServiceStatusRequest) (*ServiceStatusResponse, error)
 	// PasswordGet returns an existing password or creates a new one.
 	PasswordGet(context.Context, *PasswordGetRequest) (*PasswordGetResponse, error)
+	// PasswordRead returns a stored password without creating it.
+	PasswordRead(context.Context, *PasswordReadRequest) (*PasswordReadResponse, error)
+	// PasswordList returns all stored passwords grouped by service name.
+	PasswordList(context.Context, *PasswordListRequest) (*PasswordListResponse, error)
 	mustEmbedUnimplementedSidecarServer()
 }
 
@@ -94,6 +124,12 @@ func (UnimplementedSidecarServer) ServiceStatus(context.Context, *ServiceStatusR
 }
 func (UnimplementedSidecarServer) PasswordGet(context.Context, *PasswordGetRequest) (*PasswordGetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method PasswordGet not implemented")
+}
+func (UnimplementedSidecarServer) PasswordRead(context.Context, *PasswordReadRequest) (*PasswordReadResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PasswordRead not implemented")
+}
+func (UnimplementedSidecarServer) PasswordList(context.Context, *PasswordListRequest) (*PasswordListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PasswordList not implemented")
 }
 func (UnimplementedSidecarServer) mustEmbedUnimplementedSidecarServer() {}
 func (UnimplementedSidecarServer) testEmbeddedByValue()                 {}
@@ -152,6 +188,42 @@ func _Sidecar_PasswordGet_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sidecar_PasswordRead_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PasswordReadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SidecarServer).PasswordRead(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Sidecar_PasswordRead_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SidecarServer).PasswordRead(ctx, req.(*PasswordReadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sidecar_PasswordList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PasswordListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SidecarServer).PasswordList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Sidecar_PasswordList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SidecarServer).PasswordList(ctx, req.(*PasswordListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Sidecar_ServiceDesc is the grpc.ServiceDesc for Sidecar service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -166,6 +238,14 @@ var Sidecar_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PasswordGet",
 			Handler:    _Sidecar_PasswordGet_Handler,
+		},
+		{
+			MethodName: "PasswordRead",
+			Handler:    _Sidecar_PasswordRead_Handler,
+		},
+		{
+			MethodName: "PasswordList",
+			Handler:    _Sidecar_PasswordList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
