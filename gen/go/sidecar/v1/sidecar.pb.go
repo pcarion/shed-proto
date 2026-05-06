@@ -1383,8 +1383,9 @@ type ConfigurePgHbaConfRequest struct {
 	Type          PgHbaType              `protobuf:"varint,2,opt,name=type,proto3,enum=sidecar.v1.PgHbaType" json:"type,omitempty"`
 	Database      string                 `protobuf:"bytes,3,opt,name=database,proto3" json:"database,omitempty"`
 	Users         []string               `protobuf:"bytes,4,rep,name=users,proto3" json:"users,omitempty"`
-	Address       string                 `protobuf:"bytes,5,opt,name=address,proto3" json:"address,omitempty"`
+	Address       *string                `protobuf:"bytes,5,opt,name=address,proto3,oneof" json:"address,omitempty"`
 	Method        string                 `protobuf:"bytes,6,opt,name=method,proto3" json:"method,omitempty"`
+	Options       *string                `protobuf:"bytes,7,opt,name=options,proto3,oneof" json:"options,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1448,8 +1449,8 @@ func (x *ConfigurePgHbaConfRequest) GetUsers() []string {
 }
 
 func (x *ConfigurePgHbaConfRequest) GetAddress() string {
-	if x != nil {
-		return x.Address
+	if x != nil && x.Address != nil {
+		return *x.Address
 	}
 	return ""
 }
@@ -1457,6 +1458,13 @@ func (x *ConfigurePgHbaConfRequest) GetAddress() string {
 func (x *ConfigurePgHbaConfRequest) GetMethod() string {
 	if x != nil {
 		return x.Method
+	}
+	return ""
+}
+
+func (x *ConfigurePgHbaConfRequest) GetOptions() string {
+	if x != nil && x.Options != nil {
+		return *x.Options
 	}
 	return ""
 }
@@ -1590,14 +1598,19 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\n" +
 	"ParamEntry\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value\"\xc7\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\"\x83\x02\n" +
 	"\x19ConfigurePgHbaConfRequest\x12\x1b\n" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12)\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x15.sidecar.v1.PgHbaTypeR\x04type\x12\x1a\n" +
 	"\bdatabase\x18\x03 \x01(\tR\bdatabase\x12\x14\n" +
-	"\x05users\x18\x04 \x03(\tR\x05users\x12\x18\n" +
-	"\aaddress\x18\x05 \x01(\tR\aaddress\x12\x16\n" +
-	"\x06method\x18\x06 \x01(\tR\x06method\"N\n" +
+	"\x05users\x18\x04 \x03(\tR\x05users\x12\x1d\n" +
+	"\aaddress\x18\x05 \x01(\tH\x00R\aaddress\x88\x01\x01\x12\x16\n" +
+	"\x06method\x18\x06 \x01(\tR\x06method\x12\x1d\n" +
+	"\aoptions\x18\a \x01(\tH\x01R\aoptions\x88\x01\x01B\n" +
+	"\n" +
+	"\b_addressB\n" +
+	"\n" +
+	"\b_options\"N\n" +
 	"\x1aConfigurePgHbaConfResponse\x12\x19\n" +
 	"\bis_valid\x18\x01 \x01(\bR\aisValid\x12\x15\n" +
 	"\x06is_new\x18\x02 \x01(\bR\x05isNew*\xef\x01\n" +
@@ -1712,6 +1725,7 @@ func file_sidecar_v1_sidecar_proto_init() {
 		return
 	}
 	file_sidecar_v1_sidecar_proto_msgTypes[2].OneofWrappers = []any{}
+	file_sidecar_v1_sidecar_proto_msgTypes[24].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

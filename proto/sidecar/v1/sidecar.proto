@@ -192,8 +192,9 @@ message ConfigurePgHbaConfRequest {
   PgHbaType type = 2;
   string database = 3;
   repeated string users = 4;
-  string address = 5;
+  optional string address = 5;
   string method = 6;
+  optional string options = 7;
 }
 
 message ConfigurePgHbaConfResponse {
