@@ -19,16 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Sidecar_ServiceStatus_FullMethodName      = "/sidecar.v1.Sidecar/ServiceStatus"
-	Sidecar_PasswordGet_FullMethodName        = "/sidecar.v1.Sidecar/PasswordGet"
-	Sidecar_PasswordRead_FullMethodName       = "/sidecar.v1.Sidecar/PasswordRead"
-	Sidecar_PasswordList_FullMethodName       = "/sidecar.v1.Sidecar/PasswordList"
-	Sidecar_NetworkPortGet_FullMethodName     = "/sidecar.v1.Sidecar/NetworkPortGet"
-	Sidecar_NetworkList_FullMethodName        = "/sidecar.v1.Sidecar/NetworkList"
-	Sidecar_ParamSet_FullMethodName           = "/sidecar.v1.Sidecar/ParamSet"
-	Sidecar_ParamGet_FullMethodName           = "/sidecar.v1.Sidecar/ParamGet"
-	Sidecar_ParamList_FullMethodName          = "/sidecar.v1.Sidecar/ParamList"
-	Sidecar_ConfigurePgHbaConf_FullMethodName = "/sidecar.v1.Sidecar/ConfigurePgHbaConf"
+	Sidecar_ServiceStatus_FullMethodName         = "/sidecar.v1.Sidecar/ServiceStatus"
+	Sidecar_PasswordGet_FullMethodName           = "/sidecar.v1.Sidecar/PasswordGet"
+	Sidecar_PasswordRead_FullMethodName          = "/sidecar.v1.Sidecar/PasswordRead"
+	Sidecar_PasswordList_FullMethodName          = "/sidecar.v1.Sidecar/PasswordList"
+	Sidecar_NetworkPortGet_FullMethodName        = "/sidecar.v1.Sidecar/NetworkPortGet"
+	Sidecar_NetworkList_FullMethodName           = "/sidecar.v1.Sidecar/NetworkList"
+	Sidecar_ParamSet_FullMethodName              = "/sidecar.v1.Sidecar/ParamSet"
+	Sidecar_ParamGet_FullMethodName              = "/sidecar.v1.Sidecar/ParamGet"
+	Sidecar_ParamList_FullMethodName             = "/sidecar.v1.Sidecar/ParamList"
+	Sidecar_ConfigurePgHbaConf_FullMethodName    = "/sidecar.v1.Sidecar/ConfigurePgHbaConf"
+	Sidecar_ConfigureKeyValueConf_FullMethodName = "/sidecar.v1.Sidecar/ConfigureKeyValueConf"
+	Sidecar_ConfigureGetKeyValue_FullMethodName  = "/sidecar.v1.Sidecar/ConfigureGetKeyValue"
 )
 
 // SidecarClient is the client API for Sidecar service.
@@ -60,6 +62,10 @@ type SidecarClient interface {
 	ParamList(ctx context.Context, in *ParamListRequest, opts ...grpc.CallOption) (*ParamListResponse, error)
 	// ConfigurePgHbaConf configures an entry in a PostgreSQL pg_hba.conf file.
 	ConfigurePgHbaConf(ctx context.Context, in *ConfigurePgHbaConfRequest, opts ...grpc.CallOption) (*ConfigurePgHbaConfResponse, error)
+	// ConfigureKeyValueConf configures entries in a key/value configuration file.
+	ConfigureKeyValueConf(ctx context.Context, in *ConfigureKeyValueConfRequest, opts ...grpc.CallOption) (*ConfigureKeyValueConfResponse, error)
+	// ConfigureGetKeyValue returns an entry from a key/value configuration file.
+	ConfigureGetKeyValue(ctx context.Context, in *ConfigureGetKeyValueRequest, opts ...grpc.CallOption) (*ConfigureGetKeyValueResponse, error)
 }
 
 type sidecarClient struct {
@@ -170,6 +176,26 @@ func (c *sidecarClient) ConfigurePgHbaConf(ctx context.Context, in *ConfigurePgH
 	return out, nil
 }
 
+func (c *sidecarClient) ConfigureKeyValueConf(ctx context.Context, in *ConfigureKeyValueConfRequest, opts ...grpc.CallOption) (*ConfigureKeyValueConfResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfigureKeyValueConfResponse)
+	err := c.cc.Invoke(ctx, Sidecar_ConfigureKeyValueConf_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sidecarClient) ConfigureGetKeyValue(ctx context.Context, in *ConfigureGetKeyValueRequest, opts ...grpc.CallOption) (*ConfigureGetKeyValueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfigureGetKeyValueResponse)
+	err := c.cc.Invoke(ctx, Sidecar_ConfigureGetKeyValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SidecarServer is the server API for Sidecar service.
 // All implementations must embed UnimplementedSidecarServer
 // for forward compatibility.
@@ -199,6 +225,10 @@ type SidecarServer interface {
 	ParamList(context.Context, *ParamListRequest) (*ParamListResponse, error)
 	// ConfigurePgHbaConf configures an entry in a PostgreSQL pg_hba.conf file.
 	ConfigurePgHbaConf(context.Context, *ConfigurePgHbaConfRequest) (*ConfigurePgHbaConfResponse, error)
+	// ConfigureKeyValueConf configures entries in a key/value configuration file.
+	ConfigureKeyValueConf(context.Context, *ConfigureKeyValueConfRequest) (*ConfigureKeyValueConfResponse, error)
+	// ConfigureGetKeyValue returns an entry from a key/value configuration file.
+	ConfigureGetKeyValue(context.Context, *ConfigureGetKeyValueRequest) (*ConfigureGetKeyValueResponse, error)
 	mustEmbedUnimplementedSidecarServer()
 }
 
@@ -238,6 +268,12 @@ func (UnimplementedSidecarServer) ParamList(context.Context, *ParamListRequest) 
 }
 func (UnimplementedSidecarServer) ConfigurePgHbaConf(context.Context, *ConfigurePgHbaConfRequest) (*ConfigurePgHbaConfResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ConfigurePgHbaConf not implemented")
+}
+func (UnimplementedSidecarServer) ConfigureKeyValueConf(context.Context, *ConfigureKeyValueConfRequest) (*ConfigureKeyValueConfResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfigureKeyValueConf not implemented")
+}
+func (UnimplementedSidecarServer) ConfigureGetKeyValue(context.Context, *ConfigureGetKeyValueRequest) (*ConfigureGetKeyValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfigureGetKeyValue not implemented")
 }
 func (UnimplementedSidecarServer) mustEmbedUnimplementedSidecarServer() {}
 func (UnimplementedSidecarServer) testEmbeddedByValue()                 {}
@@ -440,6 +476,42 @@ func _Sidecar_ConfigurePgHbaConf_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sidecar_ConfigureKeyValueConf_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigureKeyValueConfRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SidecarServer).ConfigureKeyValueConf(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Sidecar_ConfigureKeyValueConf_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SidecarServer).ConfigureKeyValueConf(ctx, req.(*ConfigureKeyValueConfRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sidecar_ConfigureGetKeyValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigureGetKeyValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SidecarServer).ConfigureGetKeyValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Sidecar_ConfigureGetKeyValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SidecarServer).ConfigureGetKeyValue(ctx, req.(*ConfigureGetKeyValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Sidecar_ServiceDesc is the grpc.ServiceDesc for Sidecar service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -486,6 +558,14 @@ var Sidecar_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConfigurePgHbaConf",
 			Handler:    _Sidecar_ConfigurePgHbaConf_Handler,
+		},
+		{
+			MethodName: "ConfigureKeyValueConf",
+			Handler:    _Sidecar_ConfigureKeyValueConf_Handler,
+		},
+		{
+			MethodName: "ConfigureGetKeyValue",
+			Handler:    _Sidecar_ConfigureGetKeyValue_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

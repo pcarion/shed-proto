@@ -141,6 +141,107 @@ func (PgHbaType) EnumDescriptor() ([]byte, []int) {
 	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{1}
 }
 
+type KeyValueConfType int32
+
+const (
+	KeyValueConfType_KEY_VALUE_CONF_TYPE_UNSPECIFIED KeyValueConfType = 0
+	KeyValueConfType_KEY_VALUE_CONF_TYPE_SPACE       KeyValueConfType = 1
+	KeyValueConfType_KEY_VALUE_CONF_TYPE_EQUAL       KeyValueConfType = 2
+	KeyValueConfType_KEY_VALUE_CONF_TYPE_COLON       KeyValueConfType = 3
+)
+
+// Enum value maps for KeyValueConfType.
+var (
+	KeyValueConfType_name = map[int32]string{
+		0: "KEY_VALUE_CONF_TYPE_UNSPECIFIED",
+		1: "KEY_VALUE_CONF_TYPE_SPACE",
+		2: "KEY_VALUE_CONF_TYPE_EQUAL",
+		3: "KEY_VALUE_CONF_TYPE_COLON",
+	}
+	KeyValueConfType_value = map[string]int32{
+		"KEY_VALUE_CONF_TYPE_UNSPECIFIED": 0,
+		"KEY_VALUE_CONF_TYPE_SPACE":       1,
+		"KEY_VALUE_CONF_TYPE_EQUAL":       2,
+		"KEY_VALUE_CONF_TYPE_COLON":       3,
+	}
+)
+
+func (x KeyValueConfType) Enum() *KeyValueConfType {
+	p := new(KeyValueConfType)
+	*p = x
+	return p
+}
+
+func (x KeyValueConfType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (KeyValueConfType) Descriptor() protoreflect.EnumDescriptor {
+	return file_sidecar_v1_sidecar_proto_enumTypes[2].Descriptor()
+}
+
+func (KeyValueConfType) Type() protoreflect.EnumType {
+	return &file_sidecar_v1_sidecar_proto_enumTypes[2]
+}
+
+func (x KeyValueConfType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use KeyValueConfType.Descriptor instead.
+func (KeyValueConfType) EnumDescriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{2}
+}
+
+type KeyValueValueType int32
+
+const (
+	KeyValueValueType_KEY_VALUE_VALUE_TYPE_UNSPECIFIED KeyValueValueType = 0
+	KeyValueValueType_KEY_VALUE_VALUE_TYPE_NUMBER      KeyValueValueType = 1
+	KeyValueValueType_KEY_VALUE_VALUE_TYPE_STRING      KeyValueValueType = 2
+)
+
+// Enum value maps for KeyValueValueType.
+var (
+	KeyValueValueType_name = map[int32]string{
+		0: "KEY_VALUE_VALUE_TYPE_UNSPECIFIED",
+		1: "KEY_VALUE_VALUE_TYPE_NUMBER",
+		2: "KEY_VALUE_VALUE_TYPE_STRING",
+	}
+	KeyValueValueType_value = map[string]int32{
+		"KEY_VALUE_VALUE_TYPE_UNSPECIFIED": 0,
+		"KEY_VALUE_VALUE_TYPE_NUMBER":      1,
+		"KEY_VALUE_VALUE_TYPE_STRING":      2,
+	}
+)
+
+func (x KeyValueValueType) Enum() *KeyValueValueType {
+	p := new(KeyValueValueType)
+	*p = x
+	return p
+}
+
+func (x KeyValueValueType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (KeyValueValueType) Descriptor() protoreflect.EnumDescriptor {
+	return file_sidecar_v1_sidecar_proto_enumTypes[3].Descriptor()
+}
+
+func (KeyValueValueType) Type() protoreflect.EnumType {
+	return &file_sidecar_v1_sidecar_proto_enumTypes[3]
+}
+
+func (x KeyValueValueType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use KeyValueValueType.Descriptor instead.
+func (KeyValueValueType) EnumDescriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{3}
+}
+
 type ServiceStatusRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// services is the list of systemd unit names to query (e.g. "nginx.service").
@@ -1521,6 +1622,298 @@ func (x *ConfigurePgHbaConfResponse) GetIsNew() bool {
 	return false
 }
 
+type ConfigureKeyValueConfRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FilePath      string                 `protobuf:"bytes,1,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	Type          KeyValueConfType       `protobuf:"varint,2,opt,name=type,proto3,enum=sidecar.v1.KeyValueConfType" json:"type,omitempty"`
+	Entries       []*KeyValueEntry       `protobuf:"bytes,3,rep,name=entries,proto3" json:"entries,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfigureKeyValueConfRequest) Reset() {
+	*x = ConfigureKeyValueConfRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfigureKeyValueConfRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigureKeyValueConfRequest) ProtoMessage() {}
+
+func (x *ConfigureKeyValueConfRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigureKeyValueConfRequest.ProtoReflect.Descriptor instead.
+func (*ConfigureKeyValueConfRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *ConfigureKeyValueConfRequest) GetFilePath() string {
+	if x != nil {
+		return x.FilePath
+	}
+	return ""
+}
+
+func (x *ConfigureKeyValueConfRequest) GetType() KeyValueConfType {
+	if x != nil {
+		return x.Type
+	}
+	return KeyValueConfType_KEY_VALUE_CONF_TYPE_UNSPECIFIED
+}
+
+func (x *ConfigureKeyValueConfRequest) GetEntries() []*KeyValueEntry {
+	if x != nil {
+		return x.Entries
+	}
+	return nil
+}
+
+type KeyValueEntry struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Type          *KeyValueValueType     `protobuf:"varint,3,opt,name=type,proto3,enum=sidecar.v1.KeyValueValueType,oneof" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *KeyValueEntry) Reset() {
+	*x = KeyValueEntry{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *KeyValueEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*KeyValueEntry) ProtoMessage() {}
+
+func (x *KeyValueEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use KeyValueEntry.ProtoReflect.Descriptor instead.
+func (*KeyValueEntry) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *KeyValueEntry) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *KeyValueEntry) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+func (x *KeyValueEntry) GetType() KeyValueValueType {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return KeyValueValueType_KEY_VALUE_VALUE_TYPE_UNSPECIFIED
+}
+
+type ConfigureKeyValueConfResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IsValid       bool                   `protobuf:"varint,1,opt,name=is_valid,json=isValid,proto3" json:"is_valid,omitempty"`
+	IsNew         bool                   `protobuf:"varint,2,opt,name=is_new,json=isNew,proto3" json:"is_new,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfigureKeyValueConfResponse) Reset() {
+	*x = ConfigureKeyValueConfResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfigureKeyValueConfResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigureKeyValueConfResponse) ProtoMessage() {}
+
+func (x *ConfigureKeyValueConfResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigureKeyValueConfResponse.ProtoReflect.Descriptor instead.
+func (*ConfigureKeyValueConfResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *ConfigureKeyValueConfResponse) GetIsValid() bool {
+	if x != nil {
+		return x.IsValid
+	}
+	return false
+}
+
+func (x *ConfigureKeyValueConfResponse) GetIsNew() bool {
+	if x != nil {
+		return x.IsNew
+	}
+	return false
+}
+
+type ConfigureGetKeyValueRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FilePath      string                 `protobuf:"bytes,1,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	Type          KeyValueConfType       `protobuf:"varint,2,opt,name=type,proto3,enum=sidecar.v1.KeyValueConfType" json:"type,omitempty"`
+	Key           string                 `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfigureGetKeyValueRequest) Reset() {
+	*x = ConfigureGetKeyValueRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfigureGetKeyValueRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigureGetKeyValueRequest) ProtoMessage() {}
+
+func (x *ConfigureGetKeyValueRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigureGetKeyValueRequest.ProtoReflect.Descriptor instead.
+func (*ConfigureGetKeyValueRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ConfigureGetKeyValueRequest) GetFilePath() string {
+	if x != nil {
+		return x.FilePath
+	}
+	return ""
+}
+
+func (x *ConfigureGetKeyValueRequest) GetType() KeyValueConfType {
+	if x != nil {
+		return x.Type
+	}
+	return KeyValueConfType_KEY_VALUE_CONF_TYPE_UNSPECIFIED
+}
+
+func (x *ConfigureGetKeyValueRequest) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+type ConfigureGetKeyValueResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Value         *string                `protobuf:"bytes,1,opt,name=value,proto3,oneof" json:"value,omitempty"`
+	Type          *KeyValueValueType     `protobuf:"varint,2,opt,name=type,proto3,enum=sidecar.v1.KeyValueValueType,oneof" json:"type,omitempty"`
+	IsValid       bool                   `protobuf:"varint,3,opt,name=is_valid,json=isValid,proto3" json:"is_valid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfigureGetKeyValueResponse) Reset() {
+	*x = ConfigureGetKeyValueResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfigureGetKeyValueResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigureGetKeyValueResponse) ProtoMessage() {}
+
+func (x *ConfigureGetKeyValueResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigureGetKeyValueResponse.ProtoReflect.Descriptor instead.
+func (*ConfigureGetKeyValueResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ConfigureGetKeyValueResponse) GetValue() string {
+	if x != nil && x.Value != nil {
+		return *x.Value
+	}
+	return ""
+}
+
+func (x *ConfigureGetKeyValueResponse) GetType() KeyValueValueType {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return KeyValueValueType_KEY_VALUE_VALUE_TYPE_UNSPECIFIED
+}
+
+func (x *ConfigureGetKeyValueResponse) GetIsValid() bool {
+	if x != nil {
+		return x.IsValid
+	}
+	return false
+}
+
 var File_sidecar_v1_sidecar_proto protoreflect.FileDescriptor
 
 const file_sidecar_v1_sidecar_proto_rawDesc = "" +
@@ -1613,7 +2006,29 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\b_options\"N\n" +
 	"\x1aConfigurePgHbaConfResponse\x12\x19\n" +
 	"\bis_valid\x18\x01 \x01(\bR\aisValid\x12\x15\n" +
-	"\x06is_new\x18\x02 \x01(\bR\x05isNew*\xef\x01\n" +
+	"\x06is_new\x18\x02 \x01(\bR\x05isNew\"\xa2\x01\n" +
+	"\x1cConfigureKeyValueConfRequest\x12\x1b\n" +
+	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x120\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x1c.sidecar.v1.KeyValueConfTypeR\x04type\x123\n" +
+	"\aentries\x18\x03 \x03(\v2\x19.sidecar.v1.KeyValueEntryR\aentries\"x\n" +
+	"\rKeyValueEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\x126\n" +
+	"\x04type\x18\x03 \x01(\x0e2\x1d.sidecar.v1.KeyValueValueTypeH\x00R\x04type\x88\x01\x01B\a\n" +
+	"\x05_type\"Q\n" +
+	"\x1dConfigureKeyValueConfResponse\x12\x19\n" +
+	"\bis_valid\x18\x01 \x01(\bR\aisValid\x12\x15\n" +
+	"\x06is_new\x18\x02 \x01(\bR\x05isNew\"~\n" +
+	"\x1bConfigureGetKeyValueRequest\x12\x1b\n" +
+	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x120\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x1c.sidecar.v1.KeyValueConfTypeR\x04type\x12\x10\n" +
+	"\x03key\x18\x03 \x01(\tR\x03key\"\x9f\x01\n" +
+	"\x1cConfigureGetKeyValueResponse\x12\x19\n" +
+	"\x05value\x18\x01 \x01(\tH\x00R\x05value\x88\x01\x01\x126\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x1d.sidecar.v1.KeyValueValueTypeH\x01R\x04type\x88\x01\x01\x12\x19\n" +
+	"\bis_valid\x18\x03 \x01(\bR\aisValidB\b\n" +
+	"\x06_valueB\a\n" +
+	"\x05_type*\xef\x01\n" +
 	"\fPasswordType\x12\x1d\n" +
 	"\x19PASSWORD_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_LOWERCASE\x10\x01\x12\x1b\n" +
@@ -1626,7 +2041,16 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\tPgHbaType\x12\x1b\n" +
 	"\x17PG_HBA_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11PG_HBA_TYPE_LOCAL\x10\x01\x12\x14\n" +
-	"\x10PG_HBA_TYPE_HOST\x10\x022\xbb\x06\n" +
+	"\x10PG_HBA_TYPE_HOST\x10\x02*\x94\x01\n" +
+	"\x10KeyValueConfType\x12#\n" +
+	"\x1fKEY_VALUE_CONF_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n" +
+	"\x19KEY_VALUE_CONF_TYPE_SPACE\x10\x01\x12\x1d\n" +
+	"\x19KEY_VALUE_CONF_TYPE_EQUAL\x10\x02\x12\x1d\n" +
+	"\x19KEY_VALUE_CONF_TYPE_COLON\x10\x03*{\n" +
+	"\x11KeyValueValueType\x12$\n" +
+	" KEY_VALUE_VALUE_TYPE_UNSPECIFIED\x10\x00\x12\x1f\n" +
+	"\x1bKEY_VALUE_VALUE_TYPE_NUMBER\x10\x01\x12\x1f\n" +
+	"\x1bKEY_VALUE_VALUE_TYPE_STRING\x10\x022\x94\b\n" +
 	"\aSidecar\x12T\n" +
 	"\rServiceStatus\x12 .sidecar.v1.ServiceStatusRequest\x1a!.sidecar.v1.ServiceStatusResponse\x12N\n" +
 	"\vPasswordGet\x12\x1e.sidecar.v1.PasswordGetRequest\x1a\x1f.sidecar.v1.PasswordGetResponse\x12Q\n" +
@@ -1637,7 +2061,9 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\bParamSet\x12\x1b.sidecar.v1.ParamSetRequest\x1a\x1c.sidecar.v1.ParamSetResponse\x12E\n" +
 	"\bParamGet\x12\x1b.sidecar.v1.ParamGetRequest\x1a\x1c.sidecar.v1.ParamGetResponse\x12H\n" +
 	"\tParamList\x12\x1c.sidecar.v1.ParamListRequest\x1a\x1d.sidecar.v1.ParamListResponse\x12c\n" +
-	"\x12ConfigurePgHbaConf\x12%.sidecar.v1.ConfigurePgHbaConfRequest\x1a&.sidecar.v1.ConfigurePgHbaConfResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
+	"\x12ConfigurePgHbaConf\x12%.sidecar.v1.ConfigurePgHbaConfRequest\x1a&.sidecar.v1.ConfigurePgHbaConfResponse\x12l\n" +
+	"\x15ConfigureKeyValueConf\x12(.sidecar.v1.ConfigureKeyValueConfRequest\x1a).sidecar.v1.ConfigureKeyValueConfResponse\x12i\n" +
+	"\x14ConfigureGetKeyValue\x12'.sidecar.v1.ConfigureGetKeyValueRequest\x1a(.sidecar.v1.ConfigureGetKeyValueResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
 
 var (
 	file_sidecar_v1_sidecar_proto_rawDescOnce sync.Once
@@ -1651,72 +2077,88 @@ func file_sidecar_v1_sidecar_proto_rawDescGZIP() []byte {
 	return file_sidecar_v1_sidecar_proto_rawDescData
 }
 
-var file_sidecar_v1_sidecar_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_sidecar_v1_sidecar_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_sidecar_v1_sidecar_proto_goTypes = []any{
-	(PasswordType)(0),                  // 0: sidecar.v1.PasswordType
-	(PgHbaType)(0),                     // 1: sidecar.v1.PgHbaType
-	(*ServiceStatusRequest)(nil),       // 2: sidecar.v1.ServiceStatusRequest
-	(*ServiceStatusResponse)(nil),      // 3: sidecar.v1.ServiceStatusResponse
-	(*ServiceStatus)(nil),              // 4: sidecar.v1.ServiceStatus
-	(*PasswordGetRequest)(nil),         // 5: sidecar.v1.PasswordGetRequest
-	(*PasswordGetResponse)(nil),        // 6: sidecar.v1.PasswordGetResponse
-	(*PasswordReadRequest)(nil),        // 7: sidecar.v1.PasswordReadRequest
-	(*PasswordReadResponse)(nil),       // 8: sidecar.v1.PasswordReadResponse
-	(*PasswordListRequest)(nil),        // 9: sidecar.v1.PasswordListRequest
-	(*PasswordListResponse)(nil),       // 10: sidecar.v1.PasswordListResponse
-	(*PasswordService)(nil),            // 11: sidecar.v1.PasswordService
-	(*PasswordEntry)(nil),              // 12: sidecar.v1.PasswordEntry
-	(*NetworkPortGetRequest)(nil),      // 13: sidecar.v1.NetworkPortGetRequest
-	(*NetworkPortGetResponse)(nil),     // 14: sidecar.v1.NetworkPortGetResponse
-	(*NetworkListRequest)(nil),         // 15: sidecar.v1.NetworkListRequest
-	(*NetworkListResponse)(nil),        // 16: sidecar.v1.NetworkListResponse
-	(*NetworkEntry)(nil),               // 17: sidecar.v1.NetworkEntry
-	(*ParamSetRequest)(nil),            // 18: sidecar.v1.ParamSetRequest
-	(*ParamSetResponse)(nil),           // 19: sidecar.v1.ParamSetResponse
-	(*ParamGetRequest)(nil),            // 20: sidecar.v1.ParamGetRequest
-	(*ParamGetResponse)(nil),           // 21: sidecar.v1.ParamGetResponse
-	(*ParamListRequest)(nil),           // 22: sidecar.v1.ParamListRequest
-	(*ParamListResponse)(nil),          // 23: sidecar.v1.ParamListResponse
-	(*ParamService)(nil),               // 24: sidecar.v1.ParamService
-	(*ParamEntry)(nil),                 // 25: sidecar.v1.ParamEntry
-	(*ConfigurePgHbaConfRequest)(nil),  // 26: sidecar.v1.ConfigurePgHbaConfRequest
-	(*ConfigurePgHbaConfResponse)(nil), // 27: sidecar.v1.ConfigurePgHbaConfResponse
+	(PasswordType)(0),                     // 0: sidecar.v1.PasswordType
+	(PgHbaType)(0),                        // 1: sidecar.v1.PgHbaType
+	(KeyValueConfType)(0),                 // 2: sidecar.v1.KeyValueConfType
+	(KeyValueValueType)(0),                // 3: sidecar.v1.KeyValueValueType
+	(*ServiceStatusRequest)(nil),          // 4: sidecar.v1.ServiceStatusRequest
+	(*ServiceStatusResponse)(nil),         // 5: sidecar.v1.ServiceStatusResponse
+	(*ServiceStatus)(nil),                 // 6: sidecar.v1.ServiceStatus
+	(*PasswordGetRequest)(nil),            // 7: sidecar.v1.PasswordGetRequest
+	(*PasswordGetResponse)(nil),           // 8: sidecar.v1.PasswordGetResponse
+	(*PasswordReadRequest)(nil),           // 9: sidecar.v1.PasswordReadRequest
+	(*PasswordReadResponse)(nil),          // 10: sidecar.v1.PasswordReadResponse
+	(*PasswordListRequest)(nil),           // 11: sidecar.v1.PasswordListRequest
+	(*PasswordListResponse)(nil),          // 12: sidecar.v1.PasswordListResponse
+	(*PasswordService)(nil),               // 13: sidecar.v1.PasswordService
+	(*PasswordEntry)(nil),                 // 14: sidecar.v1.PasswordEntry
+	(*NetworkPortGetRequest)(nil),         // 15: sidecar.v1.NetworkPortGetRequest
+	(*NetworkPortGetResponse)(nil),        // 16: sidecar.v1.NetworkPortGetResponse
+	(*NetworkListRequest)(nil),            // 17: sidecar.v1.NetworkListRequest
+	(*NetworkListResponse)(nil),           // 18: sidecar.v1.NetworkListResponse
+	(*NetworkEntry)(nil),                  // 19: sidecar.v1.NetworkEntry
+	(*ParamSetRequest)(nil),               // 20: sidecar.v1.ParamSetRequest
+	(*ParamSetResponse)(nil),              // 21: sidecar.v1.ParamSetResponse
+	(*ParamGetRequest)(nil),               // 22: sidecar.v1.ParamGetRequest
+	(*ParamGetResponse)(nil),              // 23: sidecar.v1.ParamGetResponse
+	(*ParamListRequest)(nil),              // 24: sidecar.v1.ParamListRequest
+	(*ParamListResponse)(nil),             // 25: sidecar.v1.ParamListResponse
+	(*ParamService)(nil),                  // 26: sidecar.v1.ParamService
+	(*ParamEntry)(nil),                    // 27: sidecar.v1.ParamEntry
+	(*ConfigurePgHbaConfRequest)(nil),     // 28: sidecar.v1.ConfigurePgHbaConfRequest
+	(*ConfigurePgHbaConfResponse)(nil),    // 29: sidecar.v1.ConfigurePgHbaConfResponse
+	(*ConfigureKeyValueConfRequest)(nil),  // 30: sidecar.v1.ConfigureKeyValueConfRequest
+	(*KeyValueEntry)(nil),                 // 31: sidecar.v1.KeyValueEntry
+	(*ConfigureKeyValueConfResponse)(nil), // 32: sidecar.v1.ConfigureKeyValueConfResponse
+	(*ConfigureGetKeyValueRequest)(nil),   // 33: sidecar.v1.ConfigureGetKeyValueRequest
+	(*ConfigureGetKeyValueResponse)(nil),  // 34: sidecar.v1.ConfigureGetKeyValueResponse
 }
 var file_sidecar_v1_sidecar_proto_depIdxs = []int32{
-	4,  // 0: sidecar.v1.ServiceStatusResponse.statuses:type_name -> sidecar.v1.ServiceStatus
+	6,  // 0: sidecar.v1.ServiceStatusResponse.statuses:type_name -> sidecar.v1.ServiceStatus
 	0,  // 1: sidecar.v1.PasswordGetRequest.type:type_name -> sidecar.v1.PasswordType
-	11, // 2: sidecar.v1.PasswordListResponse.services:type_name -> sidecar.v1.PasswordService
-	12, // 3: sidecar.v1.PasswordService.passwords:type_name -> sidecar.v1.PasswordEntry
-	17, // 4: sidecar.v1.NetworkListResponse.networks:type_name -> sidecar.v1.NetworkEntry
-	24, // 5: sidecar.v1.ParamListResponse.services:type_name -> sidecar.v1.ParamService
-	25, // 6: sidecar.v1.ParamService.params:type_name -> sidecar.v1.ParamEntry
+	13, // 2: sidecar.v1.PasswordListResponse.services:type_name -> sidecar.v1.PasswordService
+	14, // 3: sidecar.v1.PasswordService.passwords:type_name -> sidecar.v1.PasswordEntry
+	19, // 4: sidecar.v1.NetworkListResponse.networks:type_name -> sidecar.v1.NetworkEntry
+	26, // 5: sidecar.v1.ParamListResponse.services:type_name -> sidecar.v1.ParamService
+	27, // 6: sidecar.v1.ParamService.params:type_name -> sidecar.v1.ParamEntry
 	1,  // 7: sidecar.v1.ConfigurePgHbaConfRequest.type:type_name -> sidecar.v1.PgHbaType
-	2,  // 8: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
-	5,  // 9: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
-	7,  // 10: sidecar.v1.Sidecar.PasswordRead:input_type -> sidecar.v1.PasswordReadRequest
-	9,  // 11: sidecar.v1.Sidecar.PasswordList:input_type -> sidecar.v1.PasswordListRequest
-	13, // 12: sidecar.v1.Sidecar.NetworkPortGet:input_type -> sidecar.v1.NetworkPortGetRequest
-	15, // 13: sidecar.v1.Sidecar.NetworkList:input_type -> sidecar.v1.NetworkListRequest
-	18, // 14: sidecar.v1.Sidecar.ParamSet:input_type -> sidecar.v1.ParamSetRequest
-	20, // 15: sidecar.v1.Sidecar.ParamGet:input_type -> sidecar.v1.ParamGetRequest
-	22, // 16: sidecar.v1.Sidecar.ParamList:input_type -> sidecar.v1.ParamListRequest
-	26, // 17: sidecar.v1.Sidecar.ConfigurePgHbaConf:input_type -> sidecar.v1.ConfigurePgHbaConfRequest
-	3,  // 18: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
-	6,  // 19: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
-	8,  // 20: sidecar.v1.Sidecar.PasswordRead:output_type -> sidecar.v1.PasswordReadResponse
-	10, // 21: sidecar.v1.Sidecar.PasswordList:output_type -> sidecar.v1.PasswordListResponse
-	14, // 22: sidecar.v1.Sidecar.NetworkPortGet:output_type -> sidecar.v1.NetworkPortGetResponse
-	16, // 23: sidecar.v1.Sidecar.NetworkList:output_type -> sidecar.v1.NetworkListResponse
-	19, // 24: sidecar.v1.Sidecar.ParamSet:output_type -> sidecar.v1.ParamSetResponse
-	21, // 25: sidecar.v1.Sidecar.ParamGet:output_type -> sidecar.v1.ParamGetResponse
-	23, // 26: sidecar.v1.Sidecar.ParamList:output_type -> sidecar.v1.ParamListResponse
-	27, // 27: sidecar.v1.Sidecar.ConfigurePgHbaConf:output_type -> sidecar.v1.ConfigurePgHbaConfResponse
-	18, // [18:28] is the sub-list for method output_type
-	8,  // [8:18] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	2,  // 8: sidecar.v1.ConfigureKeyValueConfRequest.type:type_name -> sidecar.v1.KeyValueConfType
+	31, // 9: sidecar.v1.ConfigureKeyValueConfRequest.entries:type_name -> sidecar.v1.KeyValueEntry
+	3,  // 10: sidecar.v1.KeyValueEntry.type:type_name -> sidecar.v1.KeyValueValueType
+	2,  // 11: sidecar.v1.ConfigureGetKeyValueRequest.type:type_name -> sidecar.v1.KeyValueConfType
+	3,  // 12: sidecar.v1.ConfigureGetKeyValueResponse.type:type_name -> sidecar.v1.KeyValueValueType
+	4,  // 13: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
+	7,  // 14: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
+	9,  // 15: sidecar.v1.Sidecar.PasswordRead:input_type -> sidecar.v1.PasswordReadRequest
+	11, // 16: sidecar.v1.Sidecar.PasswordList:input_type -> sidecar.v1.PasswordListRequest
+	15, // 17: sidecar.v1.Sidecar.NetworkPortGet:input_type -> sidecar.v1.NetworkPortGetRequest
+	17, // 18: sidecar.v1.Sidecar.NetworkList:input_type -> sidecar.v1.NetworkListRequest
+	20, // 19: sidecar.v1.Sidecar.ParamSet:input_type -> sidecar.v1.ParamSetRequest
+	22, // 20: sidecar.v1.Sidecar.ParamGet:input_type -> sidecar.v1.ParamGetRequest
+	24, // 21: sidecar.v1.Sidecar.ParamList:input_type -> sidecar.v1.ParamListRequest
+	28, // 22: sidecar.v1.Sidecar.ConfigurePgHbaConf:input_type -> sidecar.v1.ConfigurePgHbaConfRequest
+	30, // 23: sidecar.v1.Sidecar.ConfigureKeyValueConf:input_type -> sidecar.v1.ConfigureKeyValueConfRequest
+	33, // 24: sidecar.v1.Sidecar.ConfigureGetKeyValue:input_type -> sidecar.v1.ConfigureGetKeyValueRequest
+	5,  // 25: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
+	8,  // 26: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
+	10, // 27: sidecar.v1.Sidecar.PasswordRead:output_type -> sidecar.v1.PasswordReadResponse
+	12, // 28: sidecar.v1.Sidecar.PasswordList:output_type -> sidecar.v1.PasswordListResponse
+	16, // 29: sidecar.v1.Sidecar.NetworkPortGet:output_type -> sidecar.v1.NetworkPortGetResponse
+	18, // 30: sidecar.v1.Sidecar.NetworkList:output_type -> sidecar.v1.NetworkListResponse
+	21, // 31: sidecar.v1.Sidecar.ParamSet:output_type -> sidecar.v1.ParamSetResponse
+	23, // 32: sidecar.v1.Sidecar.ParamGet:output_type -> sidecar.v1.ParamGetResponse
+	25, // 33: sidecar.v1.Sidecar.ParamList:output_type -> sidecar.v1.ParamListResponse
+	29, // 34: sidecar.v1.Sidecar.ConfigurePgHbaConf:output_type -> sidecar.v1.ConfigurePgHbaConfResponse
+	32, // 35: sidecar.v1.Sidecar.ConfigureKeyValueConf:output_type -> sidecar.v1.ConfigureKeyValueConfResponse
+	34, // 36: sidecar.v1.Sidecar.ConfigureGetKeyValue:output_type -> sidecar.v1.ConfigureGetKeyValueResponse
+	25, // [25:37] is the sub-list for method output_type
+	13, // [13:25] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_sidecar_v1_sidecar_proto_init() }
@@ -1726,13 +2168,15 @@ func file_sidecar_v1_sidecar_proto_init() {
 	}
 	file_sidecar_v1_sidecar_proto_msgTypes[2].OneofWrappers = []any{}
 	file_sidecar_v1_sidecar_proto_msgTypes[24].OneofWrappers = []any{}
+	file_sidecar_v1_sidecar_proto_msgTypes[27].OneofWrappers = []any{}
+	file_sidecar_v1_sidecar_proto_msgTypes[30].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sidecar_v1_sidecar_proto_rawDesc), len(file_sidecar_v1_sidecar_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   26,
+			NumEnums:      4,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

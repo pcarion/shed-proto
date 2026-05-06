@@ -29,6 +29,10 @@ service Sidecar {
   rpc ParamList(ParamListRequest) returns (ParamListResponse);
   // ConfigurePgHbaConf configures an entry in a PostgreSQL pg_hba.conf file.
   rpc ConfigurePgHbaConf(ConfigurePgHbaConfRequest) returns (ConfigurePgHbaConfResponse);
+  // ConfigureKeyValueConf configures entries in a key/value configuration file.
+  rpc ConfigureKeyValueConf(ConfigureKeyValueConfRequest) returns (ConfigureKeyValueConfResponse);
+  // ConfigureGetKeyValue returns an entry from a key/value configuration file.
+  rpc ConfigureGetKeyValue(ConfigureGetKeyValueRequest) returns (ConfigureGetKeyValueResponse);
 }
 
 enum PasswordType {
@@ -53,6 +57,19 @@ enum PgHbaType {
   PG_HBA_TYPE_UNSPECIFIED = 0;
   PG_HBA_TYPE_LOCAL = 1;
   PG_HBA_TYPE_HOST = 2;
+}
+
+enum KeyValueConfType {
+  KEY_VALUE_CONF_TYPE_UNSPECIFIED = 0;
+  KEY_VALUE_CONF_TYPE_SPACE = 1;
+  KEY_VALUE_CONF_TYPE_EQUAL = 2;
+  KEY_VALUE_CONF_TYPE_COLON = 3;
+}
+
+enum KeyValueValueType {
+  KEY_VALUE_VALUE_TYPE_UNSPECIFIED = 0;
+  KEY_VALUE_VALUE_TYPE_NUMBER = 1;
+  KEY_VALUE_VALUE_TYPE_STRING = 2;
 }
 
 message ServiceStatusRequest {
@@ -200,4 +217,33 @@ message ConfigurePgHbaConfRequest {
 message ConfigurePgHbaConfResponse {
   bool is_valid = 1;
   bool is_new = 2;
+}
+
+message ConfigureKeyValueConfRequest {
+  string file_path = 1;
+  KeyValueConfType type = 2;
+  repeated KeyValueEntry entries = 3;
+}
+
+message KeyValueEntry {
+  string key = 1;
+  string value = 2;
+  optional KeyValueValueType type = 3;
+}
+
+message ConfigureKeyValueConfResponse {
+  bool is_valid = 1;
+  bool is_new = 2;
+}
+
+message ConfigureGetKeyValueRequest {
+  string file_path = 1;
+  KeyValueConfType type = 2;
+  string key = 3;
+}
+
+message ConfigureGetKeyValueResponse {
+  optional string value = 1;
+  optional KeyValueValueType type = 2;
+  bool is_valid = 3;
 }
