@@ -19,15 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Sidecar_ServiceStatus_FullMethodName  = "/sidecar.v1.Sidecar/ServiceStatus"
-	Sidecar_PasswordGet_FullMethodName    = "/sidecar.v1.Sidecar/PasswordGet"
-	Sidecar_PasswordRead_FullMethodName   = "/sidecar.v1.Sidecar/PasswordRead"
-	Sidecar_PasswordList_FullMethodName   = "/sidecar.v1.Sidecar/PasswordList"
-	Sidecar_NetworkPortGet_FullMethodName = "/sidecar.v1.Sidecar/NetworkPortGet"
-	Sidecar_NetworkList_FullMethodName    = "/sidecar.v1.Sidecar/NetworkList"
-	Sidecar_ParamSet_FullMethodName       = "/sidecar.v1.Sidecar/ParamSet"
-	Sidecar_ParamGet_FullMethodName       = "/sidecar.v1.Sidecar/ParamGet"
-	Sidecar_ParamList_FullMethodName      = "/sidecar.v1.Sidecar/ParamList"
+	Sidecar_ServiceStatus_FullMethodName      = "/sidecar.v1.Sidecar/ServiceStatus"
+	Sidecar_PasswordGet_FullMethodName        = "/sidecar.v1.Sidecar/PasswordGet"
+	Sidecar_PasswordRead_FullMethodName       = "/sidecar.v1.Sidecar/PasswordRead"
+	Sidecar_PasswordList_FullMethodName       = "/sidecar.v1.Sidecar/PasswordList"
+	Sidecar_NetworkPortGet_FullMethodName     = "/sidecar.v1.Sidecar/NetworkPortGet"
+	Sidecar_NetworkList_FullMethodName        = "/sidecar.v1.Sidecar/NetworkList"
+	Sidecar_ParamSet_FullMethodName           = "/sidecar.v1.Sidecar/ParamSet"
+	Sidecar_ParamGet_FullMethodName           = "/sidecar.v1.Sidecar/ParamGet"
+	Sidecar_ParamList_FullMethodName          = "/sidecar.v1.Sidecar/ParamList"
+	Sidecar_ConfigurePgHbaConf_FullMethodName = "/sidecar.v1.Sidecar/ConfigurePgHbaConf"
 )
 
 // SidecarClient is the client API for Sidecar service.
@@ -57,6 +58,8 @@ type SidecarClient interface {
 	ParamGet(ctx context.Context, in *ParamGetRequest, opts ...grpc.CallOption) (*ParamGetResponse, error)
 	// ParamList returns all stored parameters grouped by service name.
 	ParamList(ctx context.Context, in *ParamListRequest, opts ...grpc.CallOption) (*ParamListResponse, error)
+	// ConfigurePgHbaConf configures an entry in a PostgreSQL pg_hba.conf file.
+	ConfigurePgHbaConf(ctx context.Context, in *ConfigurePgHbaConfRequest, opts ...grpc.CallOption) (*ConfigurePgHbaConfResponse, error)
 }
 
 type sidecarClient struct {
@@ -157,6 +160,16 @@ func (c *sidecarClient) ParamList(ctx context.Context, in *ParamListRequest, opt
 	return out, nil
 }
 
+func (c *sidecarClient) ConfigurePgHbaConf(ctx context.Context, in *ConfigurePgHbaConfRequest, opts ...grpc.CallOption) (*ConfigurePgHbaConfResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfigurePgHbaConfResponse)
+	err := c.cc.Invoke(ctx, Sidecar_ConfigurePgHbaConf_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SidecarServer is the server API for Sidecar service.
 // All implementations must embed UnimplementedSidecarServer
 // for forward compatibility.
@@ -184,6 +197,8 @@ type SidecarServer interface {
 	ParamGet(context.Context, *ParamGetRequest) (*ParamGetResponse, error)
 	// ParamList returns all stored parameters grouped by service name.
 	ParamList(context.Context, *ParamListRequest) (*ParamListResponse, error)
+	// ConfigurePgHbaConf configures an entry in a PostgreSQL pg_hba.conf file.
+	ConfigurePgHbaConf(context.Context, *ConfigurePgHbaConfRequest) (*ConfigurePgHbaConfResponse, error)
 	mustEmbedUnimplementedSidecarServer()
 }
 
@@ -220,6 +235,9 @@ func (UnimplementedSidecarServer) ParamGet(context.Context, *ParamGetRequest) (*
 }
 func (UnimplementedSidecarServer) ParamList(context.Context, *ParamListRequest) (*ParamListResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ParamList not implemented")
+}
+func (UnimplementedSidecarServer) ConfigurePgHbaConf(context.Context, *ConfigurePgHbaConfRequest) (*ConfigurePgHbaConfResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfigurePgHbaConf not implemented")
 }
 func (UnimplementedSidecarServer) mustEmbedUnimplementedSidecarServer() {}
 func (UnimplementedSidecarServer) testEmbeddedByValue()                 {}
@@ -404,6 +422,24 @@ func _Sidecar_ParamList_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sidecar_ConfigurePgHbaConf_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigurePgHbaConfRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SidecarServer).ConfigurePgHbaConf(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Sidecar_ConfigurePgHbaConf_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SidecarServer).ConfigurePgHbaConf(ctx, req.(*ConfigurePgHbaConfRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Sidecar_ServiceDesc is the grpc.ServiceDesc for Sidecar service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -446,6 +482,10 @@ var Sidecar_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ParamList",
 			Handler:    _Sidecar_ParamList_Handler,
+		},
+		{
+			MethodName: "ConfigurePgHbaConf",
+			Handler:    _Sidecar_ConfigurePgHbaConf_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

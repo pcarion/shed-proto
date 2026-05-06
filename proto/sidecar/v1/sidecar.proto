@@ -27,6 +27,8 @@ service Sidecar {
   rpc ParamGet(ParamGetRequest) returns (ParamGetResponse);
   // ParamList returns all stored parameters grouped by service name.
   rpc ParamList(ParamListRequest) returns (ParamListResponse);
+  // ConfigurePgHbaConf configures an entry in a PostgreSQL pg_hba.conf file.
+  rpc ConfigurePgHbaConf(ConfigurePgHbaConfRequest) returns (ConfigurePgHbaConfResponse);
 }
 
 enum PasswordType {
@@ -45,6 +47,12 @@ enum PasswordType {
   PASSWORD_TYPE_HEX_UPPER = 6;
   // PASSWORD_TYPE_UUID_V7 generates a UUIDv7 value (u7).
   PASSWORD_TYPE_UUID_V7 = 7;
+}
+
+enum PgHbaType {
+  PG_HBA_TYPE_UNSPECIFIED = 0;
+  PG_HBA_TYPE_LOCAL = 1;
+  PG_HBA_TYPE_HOST = 2;
 }
 
 message ServiceStatusRequest {
@@ -177,4 +185,18 @@ message ParamService {
 message ParamEntry {
   string name = 1;
   string value = 2;
+}
+
+message ConfigurePgHbaConfRequest {
+  string file_path = 1;
+  PgHbaType type = 2;
+  string database = 3;
+  repeated string users = 4;
+  string address = 5;
+  string method = 6;
+}
+
+message ConfigurePgHbaConfResponse {
+  bool is_valid = 1;
+  bool is_new = 2;
 }
