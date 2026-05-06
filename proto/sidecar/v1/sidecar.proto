@@ -33,6 +33,8 @@ service Sidecar {
   rpc ConfigureKeyValueConf(ConfigureKeyValueConfRequest) returns (ConfigureKeyValueConfResponse);
   // ConfigureGetKeyValue returns an entry from a key/value configuration file.
   rpc ConfigureGetKeyValue(ConfigureGetKeyValueRequest) returns (ConfigureGetKeyValueResponse);
+  // DockerStatus returns status information for all containers on the machine.
+  rpc DockerStatus(DockerStatusRequest) returns (DockerStatusResponse);
 }
 
 enum PasswordType {
@@ -246,4 +248,23 @@ message ConfigureGetKeyValueResponse {
   optional string value = 1;
   optional KeyValueValueType type = 2;
   bool is_valid = 3;
+}
+
+message DockerStatusRequest {}
+
+message DockerStatusResponse {
+  repeated ContainerStatus containers = 1;
+}
+
+message ContainerStatus {
+  string name = 1;
+  // state is the Docker container state, such as running, exited, or paused.
+  string state = 2;
+  // status is the human-readable Docker status, such as "Up 2 hours".
+  string status = 3;
+  string image = 4;
+  // created is the Unix timestamp when the container was created.
+  int64 created = 5;
+  // id is the short container ID.
+  string id = 6;
 }

@@ -1914,6 +1914,174 @@ func (x *ConfigureGetKeyValueResponse) GetIsValid() bool {
 	return false
 }
 
+type DockerStatusRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DockerStatusRequest) Reset() {
+	*x = DockerStatusRequest{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DockerStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DockerStatusRequest) ProtoMessage() {}
+
+func (x *DockerStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DockerStatusRequest.ProtoReflect.Descriptor instead.
+func (*DockerStatusRequest) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{31}
+}
+
+type DockerStatusResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Containers    []*ContainerStatus     `protobuf:"bytes,1,rep,name=containers,proto3" json:"containers,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DockerStatusResponse) Reset() {
+	*x = DockerStatusResponse{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DockerStatusResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DockerStatusResponse) ProtoMessage() {}
+
+func (x *DockerStatusResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DockerStatusResponse.ProtoReflect.Descriptor instead.
+func (*DockerStatusResponse) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *DockerStatusResponse) GetContainers() []*ContainerStatus {
+	if x != nil {
+		return x.Containers
+	}
+	return nil
+}
+
+type ContainerStatus struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Name  string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// state is the Docker container state, such as running, exited, or paused.
+	State string `protobuf:"bytes,2,opt,name=state,proto3" json:"state,omitempty"`
+	// status is the human-readable Docker status, such as "Up 2 hours".
+	Status string `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Image  string `protobuf:"bytes,4,opt,name=image,proto3" json:"image,omitempty"`
+	// created is the Unix timestamp when the container was created.
+	Created int64 `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
+	// id is the short container ID.
+	Id            string `protobuf:"bytes,6,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ContainerStatus) Reset() {
+	*x = ContainerStatus{}
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ContainerStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ContainerStatus) ProtoMessage() {}
+
+func (x *ContainerStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_sidecar_v1_sidecar_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ContainerStatus.ProtoReflect.Descriptor instead.
+func (*ContainerStatus) Descriptor() ([]byte, []int) {
+	return file_sidecar_v1_sidecar_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *ContainerStatus) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ContainerStatus) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+func (x *ContainerStatus) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ContainerStatus) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
+func (x *ContainerStatus) GetCreated() int64 {
+	if x != nil {
+		return x.Created
+	}
+	return 0
+}
+
+func (x *ContainerStatus) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 var File_sidecar_v1_sidecar_proto protoreflect.FileDescriptor
 
 const file_sidecar_v1_sidecar_proto_rawDesc = "" +
@@ -2028,7 +2196,19 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\x04type\x18\x02 \x01(\x0e2\x1d.sidecar.v1.KeyValueValueTypeH\x01R\x04type\x88\x01\x01\x12\x19\n" +
 	"\bis_valid\x18\x03 \x01(\bR\aisValidB\b\n" +
 	"\x06_valueB\a\n" +
-	"\x05_type*\xef\x01\n" +
+	"\x05_type\"\x15\n" +
+	"\x13DockerStatusRequest\"S\n" +
+	"\x14DockerStatusResponse\x12;\n" +
+	"\n" +
+	"containers\x18\x01 \x03(\v2\x1b.sidecar.v1.ContainerStatusR\n" +
+	"containers\"\x93\x01\n" +
+	"\x0fContainerStatus\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
+	"\x05state\x18\x02 \x01(\tR\x05state\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12\x14\n" +
+	"\x05image\x18\x04 \x01(\tR\x05image\x12\x18\n" +
+	"\acreated\x18\x05 \x01(\x03R\acreated\x12\x0e\n" +
+	"\x02id\x18\x06 \x01(\tR\x02id*\xef\x01\n" +
 	"\fPasswordType\x12\x1d\n" +
 	"\x19PASSWORD_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17PASSWORD_TYPE_LOWERCASE\x10\x01\x12\x1b\n" +
@@ -2050,7 +2230,7 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\x11KeyValueValueType\x12$\n" +
 	" KEY_VALUE_VALUE_TYPE_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bKEY_VALUE_VALUE_TYPE_NUMBER\x10\x01\x12\x1f\n" +
-	"\x1bKEY_VALUE_VALUE_TYPE_STRING\x10\x022\x94\b\n" +
+	"\x1bKEY_VALUE_VALUE_TYPE_STRING\x10\x022\xe7\b\n" +
 	"\aSidecar\x12T\n" +
 	"\rServiceStatus\x12 .sidecar.v1.ServiceStatusRequest\x1a!.sidecar.v1.ServiceStatusResponse\x12N\n" +
 	"\vPasswordGet\x12\x1e.sidecar.v1.PasswordGetRequest\x1a\x1f.sidecar.v1.PasswordGetResponse\x12Q\n" +
@@ -2063,7 +2243,8 @@ const file_sidecar_v1_sidecar_proto_rawDesc = "" +
 	"\tParamList\x12\x1c.sidecar.v1.ParamListRequest\x1a\x1d.sidecar.v1.ParamListResponse\x12c\n" +
 	"\x12ConfigurePgHbaConf\x12%.sidecar.v1.ConfigurePgHbaConfRequest\x1a&.sidecar.v1.ConfigurePgHbaConfResponse\x12l\n" +
 	"\x15ConfigureKeyValueConf\x12(.sidecar.v1.ConfigureKeyValueConfRequest\x1a).sidecar.v1.ConfigureKeyValueConfResponse\x12i\n" +
-	"\x14ConfigureGetKeyValue\x12'.sidecar.v1.ConfigureGetKeyValueRequest\x1a(.sidecar.v1.ConfigureGetKeyValueResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
+	"\x14ConfigureGetKeyValue\x12'.sidecar.v1.ConfigureGetKeyValueRequest\x1a(.sidecar.v1.ConfigureGetKeyValueResponse\x12Q\n" +
+	"\fDockerStatus\x12\x1f.sidecar.v1.DockerStatusRequest\x1a .sidecar.v1.DockerStatusResponseB;Z9github.com/pcarion/shed-proto/gen/go/sidecar/v1;sidecarv1b\x06proto3"
 
 var (
 	file_sidecar_v1_sidecar_proto_rawDescOnce sync.Once
@@ -2078,7 +2259,7 @@ func file_sidecar_v1_sidecar_proto_rawDescGZIP() []byte {
 }
 
 var file_sidecar_v1_sidecar_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_sidecar_v1_sidecar_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
 var file_sidecar_v1_sidecar_proto_goTypes = []any{
 	(PasswordType)(0),                     // 0: sidecar.v1.PasswordType
 	(PgHbaType)(0),                        // 1: sidecar.v1.PgHbaType
@@ -2115,6 +2296,9 @@ var file_sidecar_v1_sidecar_proto_goTypes = []any{
 	(*ConfigureKeyValueConfResponse)(nil), // 32: sidecar.v1.ConfigureKeyValueConfResponse
 	(*ConfigureGetKeyValueRequest)(nil),   // 33: sidecar.v1.ConfigureGetKeyValueRequest
 	(*ConfigureGetKeyValueResponse)(nil),  // 34: sidecar.v1.ConfigureGetKeyValueResponse
+	(*DockerStatusRequest)(nil),           // 35: sidecar.v1.DockerStatusRequest
+	(*DockerStatusResponse)(nil),          // 36: sidecar.v1.DockerStatusResponse
+	(*ContainerStatus)(nil),               // 37: sidecar.v1.ContainerStatus
 }
 var file_sidecar_v1_sidecar_proto_depIdxs = []int32{
 	6,  // 0: sidecar.v1.ServiceStatusResponse.statuses:type_name -> sidecar.v1.ServiceStatus
@@ -2130,35 +2314,38 @@ var file_sidecar_v1_sidecar_proto_depIdxs = []int32{
 	3,  // 10: sidecar.v1.KeyValueEntry.type:type_name -> sidecar.v1.KeyValueValueType
 	2,  // 11: sidecar.v1.ConfigureGetKeyValueRequest.type:type_name -> sidecar.v1.KeyValueConfType
 	3,  // 12: sidecar.v1.ConfigureGetKeyValueResponse.type:type_name -> sidecar.v1.KeyValueValueType
-	4,  // 13: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
-	7,  // 14: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
-	9,  // 15: sidecar.v1.Sidecar.PasswordRead:input_type -> sidecar.v1.PasswordReadRequest
-	11, // 16: sidecar.v1.Sidecar.PasswordList:input_type -> sidecar.v1.PasswordListRequest
-	15, // 17: sidecar.v1.Sidecar.NetworkPortGet:input_type -> sidecar.v1.NetworkPortGetRequest
-	17, // 18: sidecar.v1.Sidecar.NetworkList:input_type -> sidecar.v1.NetworkListRequest
-	20, // 19: sidecar.v1.Sidecar.ParamSet:input_type -> sidecar.v1.ParamSetRequest
-	22, // 20: sidecar.v1.Sidecar.ParamGet:input_type -> sidecar.v1.ParamGetRequest
-	24, // 21: sidecar.v1.Sidecar.ParamList:input_type -> sidecar.v1.ParamListRequest
-	28, // 22: sidecar.v1.Sidecar.ConfigurePgHbaConf:input_type -> sidecar.v1.ConfigurePgHbaConfRequest
-	30, // 23: sidecar.v1.Sidecar.ConfigureKeyValueConf:input_type -> sidecar.v1.ConfigureKeyValueConfRequest
-	33, // 24: sidecar.v1.Sidecar.ConfigureGetKeyValue:input_type -> sidecar.v1.ConfigureGetKeyValueRequest
-	5,  // 25: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
-	8,  // 26: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
-	10, // 27: sidecar.v1.Sidecar.PasswordRead:output_type -> sidecar.v1.PasswordReadResponse
-	12, // 28: sidecar.v1.Sidecar.PasswordList:output_type -> sidecar.v1.PasswordListResponse
-	16, // 29: sidecar.v1.Sidecar.NetworkPortGet:output_type -> sidecar.v1.NetworkPortGetResponse
-	18, // 30: sidecar.v1.Sidecar.NetworkList:output_type -> sidecar.v1.NetworkListResponse
-	21, // 31: sidecar.v1.Sidecar.ParamSet:output_type -> sidecar.v1.ParamSetResponse
-	23, // 32: sidecar.v1.Sidecar.ParamGet:output_type -> sidecar.v1.ParamGetResponse
-	25, // 33: sidecar.v1.Sidecar.ParamList:output_type -> sidecar.v1.ParamListResponse
-	29, // 34: sidecar.v1.Sidecar.ConfigurePgHbaConf:output_type -> sidecar.v1.ConfigurePgHbaConfResponse
-	32, // 35: sidecar.v1.Sidecar.ConfigureKeyValueConf:output_type -> sidecar.v1.ConfigureKeyValueConfResponse
-	34, // 36: sidecar.v1.Sidecar.ConfigureGetKeyValue:output_type -> sidecar.v1.ConfigureGetKeyValueResponse
-	25, // [25:37] is the sub-list for method output_type
-	13, // [13:25] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	37, // 13: sidecar.v1.DockerStatusResponse.containers:type_name -> sidecar.v1.ContainerStatus
+	4,  // 14: sidecar.v1.Sidecar.ServiceStatus:input_type -> sidecar.v1.ServiceStatusRequest
+	7,  // 15: sidecar.v1.Sidecar.PasswordGet:input_type -> sidecar.v1.PasswordGetRequest
+	9,  // 16: sidecar.v1.Sidecar.PasswordRead:input_type -> sidecar.v1.PasswordReadRequest
+	11, // 17: sidecar.v1.Sidecar.PasswordList:input_type -> sidecar.v1.PasswordListRequest
+	15, // 18: sidecar.v1.Sidecar.NetworkPortGet:input_type -> sidecar.v1.NetworkPortGetRequest
+	17, // 19: sidecar.v1.Sidecar.NetworkList:input_type -> sidecar.v1.NetworkListRequest
+	20, // 20: sidecar.v1.Sidecar.ParamSet:input_type -> sidecar.v1.ParamSetRequest
+	22, // 21: sidecar.v1.Sidecar.ParamGet:input_type -> sidecar.v1.ParamGetRequest
+	24, // 22: sidecar.v1.Sidecar.ParamList:input_type -> sidecar.v1.ParamListRequest
+	28, // 23: sidecar.v1.Sidecar.ConfigurePgHbaConf:input_type -> sidecar.v1.ConfigurePgHbaConfRequest
+	30, // 24: sidecar.v1.Sidecar.ConfigureKeyValueConf:input_type -> sidecar.v1.ConfigureKeyValueConfRequest
+	33, // 25: sidecar.v1.Sidecar.ConfigureGetKeyValue:input_type -> sidecar.v1.ConfigureGetKeyValueRequest
+	35, // 26: sidecar.v1.Sidecar.DockerStatus:input_type -> sidecar.v1.DockerStatusRequest
+	5,  // 27: sidecar.v1.Sidecar.ServiceStatus:output_type -> sidecar.v1.ServiceStatusResponse
+	8,  // 28: sidecar.v1.Sidecar.PasswordGet:output_type -> sidecar.v1.PasswordGetResponse
+	10, // 29: sidecar.v1.Sidecar.PasswordRead:output_type -> sidecar.v1.PasswordReadResponse
+	12, // 30: sidecar.v1.Sidecar.PasswordList:output_type -> sidecar.v1.PasswordListResponse
+	16, // 31: sidecar.v1.Sidecar.NetworkPortGet:output_type -> sidecar.v1.NetworkPortGetResponse
+	18, // 32: sidecar.v1.Sidecar.NetworkList:output_type -> sidecar.v1.NetworkListResponse
+	21, // 33: sidecar.v1.Sidecar.ParamSet:output_type -> sidecar.v1.ParamSetResponse
+	23, // 34: sidecar.v1.Sidecar.ParamGet:output_type -> sidecar.v1.ParamGetResponse
+	25, // 35: sidecar.v1.Sidecar.ParamList:output_type -> sidecar.v1.ParamListResponse
+	29, // 36: sidecar.v1.Sidecar.ConfigurePgHbaConf:output_type -> sidecar.v1.ConfigurePgHbaConfResponse
+	32, // 37: sidecar.v1.Sidecar.ConfigureKeyValueConf:output_type -> sidecar.v1.ConfigureKeyValueConfResponse
+	34, // 38: sidecar.v1.Sidecar.ConfigureGetKeyValue:output_type -> sidecar.v1.ConfigureGetKeyValueResponse
+	36, // 39: sidecar.v1.Sidecar.DockerStatus:output_type -> sidecar.v1.DockerStatusResponse
+	27, // [27:40] is the sub-list for method output_type
+	14, // [14:27] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_sidecar_v1_sidecar_proto_init() }
@@ -2176,7 +2363,7 @@ func file_sidecar_v1_sidecar_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sidecar_v1_sidecar_proto_rawDesc), len(file_sidecar_v1_sidecar_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   31,
+			NumMessages:   34,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

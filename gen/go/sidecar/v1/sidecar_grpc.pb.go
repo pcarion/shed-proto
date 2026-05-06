@@ -31,6 +31,7 @@ const (
 	Sidecar_ConfigurePgHbaConf_FullMethodName    = "/sidecar.v1.Sidecar/ConfigurePgHbaConf"
 	Sidecar_ConfigureKeyValueConf_FullMethodName = "/sidecar.v1.Sidecar/ConfigureKeyValueConf"
 	Sidecar_ConfigureGetKeyValue_FullMethodName  = "/sidecar.v1.Sidecar/ConfigureGetKeyValue"
+	Sidecar_DockerStatus_FullMethodName          = "/sidecar.v1.Sidecar/DockerStatus"
 )
 
 // SidecarClient is the client API for Sidecar service.
@@ -66,6 +67,8 @@ type SidecarClient interface {
 	ConfigureKeyValueConf(ctx context.Context, in *ConfigureKeyValueConfRequest, opts ...grpc.CallOption) (*ConfigureKeyValueConfResponse, error)
 	// ConfigureGetKeyValue returns an entry from a key/value configuration file.
 	ConfigureGetKeyValue(ctx context.Context, in *ConfigureGetKeyValueRequest, opts ...grpc.CallOption) (*ConfigureGetKeyValueResponse, error)
+	// DockerStatus returns status information for all containers on the machine.
+	DockerStatus(ctx context.Context, in *DockerStatusRequest, opts ...grpc.CallOption) (*DockerStatusResponse, error)
 }
 
 type sidecarClient struct {
@@ -196,6 +199,16 @@ func (c *sidecarClient) ConfigureGetKeyValue(ctx context.Context, in *ConfigureG
 	return out, nil
 }
 
+func (c *sidecarClient) DockerStatus(ctx context.Context, in *DockerStatusRequest, opts ...grpc.CallOption) (*DockerStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DockerStatusResponse)
+	err := c.cc.Invoke(ctx, Sidecar_DockerStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SidecarServer is the server API for Sidecar service.
 // All implementations must embed UnimplementedSidecarServer
 // for forward compatibility.
@@ -229,6 +242,8 @@ type SidecarServer interface {
 	ConfigureKeyValueConf(context.Context, *ConfigureKeyValueConfRequest) (*ConfigureKeyValueConfResponse, error)
 	// ConfigureGetKeyValue returns an entry from a key/value configuration file.
 	ConfigureGetKeyValue(context.Context, *ConfigureGetKeyValueRequest) (*ConfigureGetKeyValueResponse, error)
+	// DockerStatus returns status information for all containers on the machine.
+	DockerStatus(context.Context, *DockerStatusRequest) (*DockerStatusResponse, error)
 	mustEmbedUnimplementedSidecarServer()
 }
 
@@ -274,6 +289,9 @@ func (UnimplementedSidecarServer) ConfigureKeyValueConf(context.Context, *Config
 }
 func (UnimplementedSidecarServer) ConfigureGetKeyValue(context.Context, *ConfigureGetKeyValueRequest) (*ConfigureGetKeyValueResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ConfigureGetKeyValue not implemented")
+}
+func (UnimplementedSidecarServer) DockerStatus(context.Context, *DockerStatusRequest) (*DockerStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DockerStatus not implemented")
 }
 func (UnimplementedSidecarServer) mustEmbedUnimplementedSidecarServer() {}
 func (UnimplementedSidecarServer) testEmbeddedByValue()                 {}
@@ -512,6 +530,24 @@ func _Sidecar_ConfigureGetKeyValue_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sidecar_DockerStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DockerStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SidecarServer).DockerStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Sidecar_DockerStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SidecarServer).DockerStatus(ctx, req.(*DockerStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Sidecar_ServiceDesc is the grpc.ServiceDesc for Sidecar service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -566,6 +602,10 @@ var Sidecar_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConfigureGetKeyValue",
 			Handler:    _Sidecar_ConfigureGetKeyValue_Handler,
+		},
+		{
+			MethodName: "DockerStatus",
+			Handler:    _Sidecar_DockerStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
